@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Javascript事件轮询 | 百度EUX </title>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?d232748d06c1fe09a6db3db0077669b7";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+
+      var _vds = _vds || [];
+      window._vds = _vds;
+      (function () {
+        _vds.push(['setAccountId', '66707fb8b27442d5b3ccca57a56800fa']);
+        _vds.push(['trackBot', false]);
+
+        (function () {
+          var vds = document.createElement('script');
+          vds.type = 'text/javascript';
+          vds.async = true;
+          vds.src = '//dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();
+    </script>
+</head>
+<body>
+<div id="root">
+    <div class="main" data-reactroot="" data-reactid="1" data-react-checksum="1259841585"><!-- react-empty: 2 --><header class="eux-header clearfix" data-reactid="3"><div class="eux-header-top" data-reactid="4"><a href="javascript:void(0);" class="eux-portable-menu" data-reactid="5"><span data-reactid="6"></span><span data-reactid="7"></span><span data-reactid="8"></span></a><!-- react-empty: 9 --><nav class="menu-primary-container" data-reactid="10"><ul id="menu-primary" class="menu" data-reactid="11"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-25" data-reactid="12"><a href="/" data-reactid="13">HOME</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-45" data-reactid="14"><a href="/" data-reactid="15">BLOG</a><ul class="sub-menu" data-reactid="16"><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="17"><a href="/ue" data-reactid="18">交互</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="19"><a href="/ui" data-reactid="20">视觉</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="21"><a href="/fe" data-reactid="22">前端</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="23"><a href="/team" data-reactid="24">团队</a></li></ul></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-46" data-reactid="25"><a href="/tools" data-reactid="26">TOOLS</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112" data-reactid="27"><a href="/works" data-reactid="28">WORKS</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-138" data-reactid="29"><a href="/jobs" data-reactid="30">JOBS</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-50" data-reactid="31"><a href="/about-us" data-reactid="32">ABOUT US</a></li></ul></nav></div></header><div class="eux-singular clearfix" data-reactid="33"><div class="container-singular clearfix" data-reactid="34"><nav class="menu-categories-container" data-reactid="35"><ul id="menu-categories" class="menu" data-reactid="36"><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="37"><span data-reactid="38"><a href="/" data-reactid="39">全部</a></span></li><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="40"><span data-reactid="41"><a href="/ue" data-reactid="42">交互</a></span></li><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="43"><span data-reactid="44"><a href="/ui" data-reactid="45">视觉</a></span></li><li class="current-menu-item menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="46"><span data-reactid="47"><a href="/fe" data-reactid="48">前端</a></span></li><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="49"><span data-reactid="50"><a href="/team" data-reactid="51">团队</a></span></li></ul></nav><div class="inner clearfix" data-reactid="52"><div class="article-meta" data-reactid="53"><h1 class="title" data-reactid="54">Javascript事件轮询</h1><div class="eux-page-detail" data-reactid="55"><span data-reactid="56"><em data-reactid="57">by.</em><!-- react-text: 58 -->sucer<!-- /react-text --></span><span data-reactid="59">2015-10-11</span></div></div><article data-reactid="60"><p data-reactid="61"><!-- react-text: 62 -->原作者： <!-- /react-text --><a href="http://blog.carbonfive.com/author/erin/" data-reactid="63">erin</a></p><h4 id="span-classs1这篇文章关于什么？span" data-reactid="64"><a href="#span-classs1%E8%BF%99%E7%AF%87%E6%96%87%E7%AB%A0%E5%85%B3%E4%BA%8E%E4%BB%80%E4%B9%88%EF%BC%9Fspan" aria-hidden="true" data-reactid="65"><span class="icon icon-link" data-reactid="66"></span></a><span class="s1" data-reactid="67">这篇文章关于什么？</span></h4><p data-reactid="68"><span class="s1" data-reactid="69">Javascript作为浏览器脚本语言，已经逐渐变得无处不在，它让你对事件驱动模型有了基本理解，以及它与request-response模型的典型语言，如Ruby，Python和Java的区别，我将阐述一些关于Javascript一致的核心概念，包括它的事件轮询和消息队列，希望能帮助你理解这门或许你不是完全理解的语言。</span></p><h4 id="span-classs1致读者：span" data-reactid="70"><a href="#span-classs1%E8%87%B4%E8%AF%BB%E8%80%85%EF%BC%9Aspan" aria-hidden="true" data-reactid="71"><span class="icon icon-link" data-reactid="72"></span></a><span class="s1" data-reactid="73">致读者：</span></h4><p data-reactid="74"><span class="s1" data-reactid="75">这篇文章写给准备使用Javascript进行服务端/客户端开发的web开发工作者（或者准备从事该职业者），如果你对事件轮询机制有比较好的了解，这篇文章或许你会觉得很熟悉。对于不是很了解事件轮询机制的读者，我希望能帮助你对这每天读写的代码有一个基本的理解。</span></p><h3 id="span-classs1非阻塞iospan" data-reactid="76"><a href="#span-classs1%E9%9D%9E%E9%98%BB%E5%A1%9Eiospan" aria-hidden="true" data-reactid="77"><span class="icon icon-link" data-reactid="78"></span></a><span class="s1" data-reactid="79">非阻塞I/O</span></h3><p data-reactid="80"><span class="s1" data-reactid="81">在Javascript中，几乎所有的I/O都是非阻塞的，其中包括http请求，数据操作以及磁盘读写；单线程询问任务运行时机以及执行任务，通过使用回调函数，能让Javascript线程在回调完成之前执行其它任务。当一个执行完成的时候，会去执行由回调函数提供的有序消息队列中的下一个任务。</span></p><p data-reactid="82"><span class="s1" data-reactid="83">当开发者熟悉了这种交互模式，用户习惯了这种界面</span><!-- react-text: 84 --> <!-- /react-text --><span class="s1" data-reactid="85">—</span><!-- react-text: 86 --> <!-- /react-text --><span class="s1" data-reactid="87">当事件发生，例如“mousedown”，“click”这种随时可能被触发的事件，它不同于同步机制，请求-响应模型很少用在服务端应用上。</span></p><p data-reactid="88"><span class="s1" data-reactid="89">让我们比较两块代码，它们分别发起HTTP请求于www.google.com然后在控制台输出响应结果。首先，Ruby，使用Faraday：</span></p><pre data-reactid="90"><code data-query="{}" data-lang="data-lang" data-reactid="91">response = Faraday.get &#x27;http://www.google.com&#x27;
+puts response
+puts &#x27;Done!&#x27;
+</code></pre><p data-reactid="92"><span class="s1" data-reactid="93">执行结果如下所示：</span></p><ol start="2" data-reactid="94"><li data-reactid="95"></li></ol><p data-reactid="96"><span class="s1" data-reactid="97">get方法已执行，然而该线程直到有响应才被回收</span></p><ol start="4" data-reactid="98"><li data-reactid="99"></li></ol><p data-reactid="100"><span class="s1" data-reactid="101">该来自Google的响应返回的数据并没有存在变量中</span></p><ol start="6" data-reactid="102"><li data-reactid="103"></li></ol><p data-reactid="104"><span class="s1" data-reactid="105">响应结果输出在控制台中</span></p><ol start="8" data-reactid="106"><li data-reactid="107"></li></ol><p data-reactid="108"><span class="s1" data-reactid="109">直至最后，“任务完成”才出现在控制台中</span></p><p data-reactid="110"><span class="s1" data-reactid="111">让我们用Javascript的Node.js及它的Request库来做同样的事：</span></p><pre data-reactid="112"><code data-query="{}" data-lang="data-lang" data-reactid="113">request(&#x27;http://www.google.com&#x27;, function(error, response, body) {
+  console.log(body);
+});
+
+console.log(&#x27;Done!&#x27;);
+</code></pre><p data-reactid="114"><span class="s1" data-reactid="115">看上去差不多，但结果截然不同：</span></p><ol start="2" data-reactid="116"><li data-reactid="117"></li></ol><p data-reactid="118"><span class="s1" data-reactid="119">请求已被执行，在请求得到响应之前则已跳过一个匿名回调函数（该函数并未执行）</span></p><ol start="4" data-reactid="120"><li data-reactid="121"></li></ol><p data-reactid="122"><span class="s1" data-reactid="123">“任务完成”马上出现在控制台中</span></p><ol start="6" data-reactid="124"><li data-reactid="125"></li></ol><p data-reactid="126"><span class="s1" data-reactid="127">一段时间之后，收到响应，此时回调函数才被执行—在控制台输出响应结果</span></p><h3 id="span-classs1事件轮询span" data-reactid="128"><a href="#span-classs1%E4%BA%8B%E4%BB%B6%E8%BD%AE%E8%AF%A2span" aria-hidden="true" data-reactid="129"><span class="icon icon-link" data-reactid="130"></span></a><span class="s1" data-reactid="131">事件轮询</span></h3><p data-reactid="132"><span class="s1" data-reactid="133">非耦合机制使得Javascript线程能在等待异步操作完成及其回调函数执行之前执行其它任务。那么，在内存中在哪激活回调？回调按什么规则执行？什么会让回调执行呢？</span></p><p data-reactid="134"><span class="s1" data-reactid="135">Javascript线程包括一个储存了待执行任务的消息列表的消息队列，以及与它们相关联的回调函数，这些消息按照它们的响应顺序排列（例如鼠标点击，或者收到来自HTTP请求的响应）每条消息都有回调函数，如果没有提供回调函数：例如当用户点击一个按钮但是没有提供回调函数，则没有消息会被添加到消息队列。</span></p><p data-reactid="136"><span class="s1" data-reactid="137">在每一次轮询中，任务队列会记录下一条消息（每次记录会返回一个“tick”），当轮询到这条消息时，该消息所对应的回调函数则被执行。</span></p><img src="http://ww1.sinaimg.cn/large/43b712ebjw1ewkmap1po0j20m00cktat.jpg" alt="alt" width="792" height="452" data-reactid="138"/><p data-reactid="139"><span class="s1" data-reactid="140">在最初的架构中，回调函数通过调用栈来实现，由于Javascript是单线程的，消息队列是阻塞的，对于后续任务，必须等待之前的任务返回栈中所有回调函数，才能将新任务的回调函数加入到栈中。在随后的架构中加入了函数（同步的）对栈的新的调用方法（此处例举一个初始化为changeColor的函数）。</span></p><pre data-reactid="141"><code data-query="{}" data-lang="data-lang" data-reactid="142">function init() {
+  var link = document.getElementById(&quot;foo&quot;);
+
+  link.addEventListener(&quot;click&quot;, function changeColor() {
+    this.style.color = &quot;burlywood&quot;;
+  });
+}
+
+init();
+</code></pre><p data-reactid="143"><span class="s1" data-reactid="144">在这个例子中，当用户点击“foo”这个元素，“onclick”事件被触发，一个消息（以及回调函数changeColor）加入消息队列。当队列按序执行到该消息时，它的回调函数changeColor被唤起。</span></p><p data-reactid="145"><span class="s1" data-reactid="146">当回调函数changeColor返回（或者出错被丢掉），事件轮询继续执行。只要与”foo”元素的onclick事件绑定的回调函数changeColor存在，随后在该元素上的click事件都会使得更多的消息（及其回调函数changeColor）被加入队列。</span></p><h3 id="span-classs1消息队列的添加span" data-reactid="147"><a href="#span-classs1%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%9A%84%E6%B7%BB%E5%8A%A0span" aria-hidden="true" data-reactid="148"><span class="icon icon-link" data-reactid="149"></span></a><span class="s1" data-reactid="150">消息队列的添加</span></h3><p data-reactid="151"><span class="s1" data-reactid="152">如果你申明了一个异步函数（例如setTimeout），其回调函数最终会在一个不同的消息队列中执行，在未来的事件轮询中的某个时刻。例如:</span></p><pre data-reactid="153"><code data-query="{}" data-lang="data-lang" data-reactid="154">function f() {
+  console.log(&quot;foo&quot;);
+  setTimeout(g, 0);
+  console.log(&quot;baz&quot;);
+  h();
+}
+
+function g() {
+  console.log(&quot;bar&quot;);
+}
+
+function h() {
+  console.log(&quot;blix&quot;);
+}
+
+f();
+</code></pre><p data-reactid="155"><span class="s1" data-reactid="156">由于setTimeout非阻塞的本质，它的回调函数的未来的若干毫秒后执行并且等待期间不占用该消息的进程。在这个例子中，setTimeout跳过它的回调函数g和一段事件的延迟后被唤起。当预先声明的时间结束（在这个例子中几乎是立即执行）被分离出去的消息又被重新加回队列，包括其回调函数g。这个回调函数被激活就好比:”foo”,”baz”,”blix”然后执行下一个事件轮询的tick:”bar”。如果在一个框架中同时声明了两个setTimeout，并且他们的第二个参数（执行时间）想同，他们的回调将会按照其定义顺序执行。</span></p><h3 id="span-classs1web-workersspan" data-reactid="157"><a href="#span-classs1web-workersspan" aria-hidden="true" data-reactid="158"><span class="icon icon-link" data-reactid="159"></span></a><span class="s1" data-reactid="160">Web Workers</span></h3><p data-reactid="161"><span class="s1" data-reactid="162">利用Web Workers能让你丢掉昂贵的多线程执行方式，释放主线程去做其他的事。Web Workers包括单独的消息队列，事件轮询，以及实例化了一个独立于最初的主线程的储存空间。利用消息传递来建立消息与主线程之间的联系，这种联系非常像我们刚才的代码示例。</span></p><img src="http://ww1.sinaimg.cn/large/43b712ebjw1ewkm02zdhtj20ol0a240q.jpg" alt="alt" width="885" height="362" data-reactid="163"/><p data-reactid="164">首先，我们的worker:</p><pre data-reactid="165"><code data-query="{}" data-lang="data-lang" data-reactid="166">// our worker, which does some CPU-intensive operation
+var reportResult = function(e) {
+  pi = SomeLib.computePiToSpecifiedDecimals(e.data);
+  postMessage(pi);
+};
+
+onmessage = reportResult;
+</code></pre><p data-reactid="167">然后，这是在html中的代码内容：</p><pre data-reactid="168"><code data-query="{}" data-lang="data-lang" data-reactid="169">// our main code, in a &lt;script&gt;-tag in our HTML page
+var piWorker = new Worker(&quot;pi_calculator.js&quot;);
+var logResult = function(e) {
+  console.log(&quot;PI: &quot; + e.data);
+};
+
+piWorker.addEventListener(&quot;message&quot;, logResult, false);
+piWorker.postMessage(100000);
+</code></pre><p data-reactid="170">该示例中，主线程产生一个worker然后将一个logResult回调函数注册到消息队列中。在worker中，reportResult函数被注册到它自己的消息事件中。当worker线程从主线程接收消息时，worker将消息及其相应的回调函数加入队列中。当消息队列按顺序执行到该消息时，主线程将发回一条消息并将一条新的消息加入队列（按照logResult的回调排序）由此开发者能让CPU集中处理分线程，释放主线程继续处理消息任务及其绑定事件。</p><h3 id="span-classs1关于闭包span" data-reactid="171"><a href="#span-classs1%E5%85%B3%E4%BA%8E%E9%97%AD%E5%8C%85span" aria-hidden="true" data-reactid="172"><span class="icon icon-link" data-reactid="173"></span></a><span class="s1" data-reactid="174">关于闭包</span></h3><p data-reactid="175"><span class="s1" data-reactid="176">Javascript支持闭包，准许注册回调，当我们执行回调时，通过执行回调创造的新的完全调用栈来维持我们创造的环境的入口。回调函数作为不同于我们创造的消息的一部分被调用。考虑如下示例：</span></p><pre data-reactid="177"><code data-query="{}" data-lang="data-lang" data-reactid="178">function changeHeaderDeferred() {
+  var header = document.getElementById(&quot;header&quot;);
+  
+  setTimeout(function changeHeader() {
+    header.style.color = &quot;red&quot;;
+
+    return false;
+  }, 100);
+
+  return false;
+}
+
+changeHeaderDeferred();
+</code></pre><p data-reactid="179"><span class="s1" data-reactid="180">在这个示例中，以头变量方式声明的changeHeaderDeferred函数被执行。setTimeout函数被唤醒，导致消息（加在changeHeader回调中的）大约在100毫秒之后（时间偏差源于每台计算机内置原子钟差异）添加到消息队列，changeHeaderDeferred返回false，结束第一条消息的进程，然而头变量依然通过闭包的方式存在，没有被垃圾回收机制回收。当第二条消息执行（changeHeader函数）维持头变量声明的外部函数域的入口。一旦第二条消息（changeHeader函数）执行完毕，头变量则被回收。</span></p><h3 id="span-classs1另外span" data-reactid="181"><a href="#span-classs1%E5%8F%A6%E5%A4%96span" aria-hidden="true" data-reactid="182"><span class="icon icon-link" data-reactid="183"></span></a><span class="s1" data-reactid="184">另外</span></h3><p data-reactid="185"><span class="s1" data-reactid="186">Javascript的事件驱动交互模型不同于大多数编程人员习惯的请求-响应模型，但是你能看到，该技术也不是那么高不可攀。一个简单的消息队列及事件轮询，Javascript使得开发者能够围绕收集异步回调的形式来建立他们的系统，在等待外部事件发生的同时释放主线程去做其它操作。它将越来越流行。</span></p></article><div data-reactid="187"></div><nav class="single-bar clearfix" data-reactid="188"><span class="prev" data-reactid="189"><a rel="prev" href="/blog/fe/js-loader" data-reactid="190"><em class="eux-icon eux-icon-page-prev" data-reactid="191"></em><!-- react-text: 192 -->脚本的动态加载<!-- /react-text --></a></span><span class="next" data-reactid="193"><a rel="next" href="/blog/fe/data-visulization-with-javascript-translation" data-reactid="194"><em class="eux-icon eux-icon-page-next" data-reactid="195"></em><!-- react-text: 196 -->Data Visulization with JavaScript 翻译<!-- /react-text --></a></span></nav></div></div></div><footer class="footer" data-reactid="197"><div class="eux-footer-area-wrapper container-singular" role="complementary" data-reactid="198"><div class="inner clearfix" data-reactid="199"><aside id="simple-links-2" class="widget sl-links-main" data-reactid="200"><h2 class="widgettitle" data-reactid="201">友情链接</h2><ul class="simple-links-list simple-links-2-list" id="simple-links-2-list" data-reactid="202"><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="203"><a target="_blank" href="http://sux.baidu.com/" title="百度 FEX 团队" data-reactid="204">百度 FEX</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="205"><a target="_blank" href="http://efe.baidu.com/" title="百度 EFE 团队" data-reactid="206">百度 EFE</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="207"><a target="_blank" href="http://sux.baidu.com/" title="百度 SUX 团队" data-reactid="208">百度 SUX</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="209"><a target="_blank" href="https://aotu.io/" title="京东凹凸实验室，面向多终端技术体系，致力于构建沉淀与分享包括但不限于交互、页面制作技巧、前端开发、原生APP开发等方面的专业知识及案例。" data-reactid="210">凹凸实验室</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="211"><a target="_blank" href="https://fed.renren.com/" title="人人网FED" data-reactid="212">人人网FED</a></li></ul></aside></div></div><div class="eux-icp" data-reactid="213"><!-- react-text: 214 -->百度EUX 版权所有 ©百度EUX    All rights reserved. 骄傲地采用 <!-- /react-text --><a target="_blank" href="https://github.com/picidaejs/picidaejs" data-reactid="215">Picidae</a><!-- react-text: 216 -->。<!-- /react-text --></div></footer></div>
+</div>
+<script src="/PICIDAE_COMMON.js"></script>
+<script src="/PICIDAE_ENTRY.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> setTimeout | 百度EUX </title>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?d232748d06c1fe09a6db3db0077669b7";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+
+      var _vds = _vds || [];
+      window._vds = _vds;
+      (function () {
+        _vds.push(['setAccountId', '66707fb8b27442d5b3ccca57a56800fa']);
+        _vds.push(['trackBot', false]);
+
+        (function () {
+          var vds = document.createElement('script');
+          vds.type = 'text/javascript';
+          vds.async = true;
+          vds.src = '//dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();
+    </script>
+</head>
+<body>
+<div id="root">
+    <div class="main" data-reactroot="" data-reactid="1" data-react-checksum="813731229"><!-- react-empty: 2 --><header class="eux-header clearfix" data-reactid="3"><div class="eux-header-top" data-reactid="4"><a href="javascript:void(0);" class="eux-portable-menu" data-reactid="5"><span data-reactid="6"></span><span data-reactid="7"></span><span data-reactid="8"></span></a><!-- react-empty: 9 --><nav class="menu-primary-container" data-reactid="10"><ul id="menu-primary" class="menu" data-reactid="11"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-25" data-reactid="12"><a href="/" data-reactid="13">HOME</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-45" data-reactid="14"><a href="/" data-reactid="15">BLOG</a><ul class="sub-menu" data-reactid="16"><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="17"><a href="/ue" data-reactid="18">交互</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="19"><a href="/ui" data-reactid="20">视觉</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="21"><a href="/fe" data-reactid="22">前端</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="23"><a href="/team" data-reactid="24">团队</a></li></ul></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-46" data-reactid="25"><a href="/tools" data-reactid="26">TOOLS</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112" data-reactid="27"><a href="/works" data-reactid="28">WORKS</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-138" data-reactid="29"><a href="/jobs" data-reactid="30">JOBS</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-50" data-reactid="31"><a href="/about-us" data-reactid="32">ABOUT US</a></li></ul></nav></div></header><div class="eux-singular clearfix" data-reactid="33"><div class="container-singular clearfix" data-reactid="34"><nav class="menu-categories-container" data-reactid="35"><ul id="menu-categories" class="menu" data-reactid="36"><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="37"><span data-reactid="38"><a href="/" data-reactid="39">全部</a></span></li><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="40"><span data-reactid="41"><a href="/ue" data-reactid="42">交互</a></span></li><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="43"><span data-reactid="44"><a href="/ui" data-reactid="45">视觉</a></span></li><li class="current-menu-item menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="46"><span data-reactid="47"><a href="/fe" data-reactid="48">前端</a></span></li><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="49"><span data-reactid="50"><a href="/team" data-reactid="51">团队</a></span></li></ul></nav><div class="inner clearfix" data-reactid="52"><div class="article-meta" data-reactid="53"><h1 class="title" data-reactid="54">setTimeout</h1><div class="eux-page-detail" data-reactid="55"><span data-reactid="56"><em data-reactid="57">by.</em><!-- react-text: 58 -->sucer<!-- /react-text --></span><span data-reactid="59">2015-9-30</span></div></div><article data-reactid="60"><img src="http://ww2.sinaimg.cn/large/43b712ebjw1ewkfd1dgcij20c306f74n.jpg" alt="alt" width="435" height="231" data-reactid="61"/><p data-reactid="62"><span class="s1" data-reactid="63">嗯，写这篇博文的起因是群里有人问，为什么我的代码直接执行了，而没有等到他delay 5秒钟？</span></p><p data-reactid="64">代码如下：</p><pre data-reactid="65"><code data-query="{}" data-lang="data-lang" data-reactid="66">setTimeout(window.location.href = &#x27;index.php?xxx=111&#x27;, 5000)
+</code></pre><p data-reactid="67"><span class="s1" data-reactid="68">当时，我回复：“你把你置入的代码用个匿名函数包起来就行了。”但这样的回复只是基于长期打代码的经验而已，并没有深入追究，写这篇博文算是为了弥补自己的知识漏洞。</span></p><p data-reactid="69"><span class="s1" data-reactid="70">关于setTimeout和setInterval，我们在认知上一直存在一个误区。如果我们认认真阅读过ECMAScript-262，我们会发现，这两个方法并没有在ECMA中被定义。</span></p><p data-reactid="71"><span class="s1" data-reactid="72">那么，他们到底来自哪里呢？翻阅MSDN和MDN对其的描述，我们可以看到如下内容：</span></p><img src="http://ww1.sinaimg.cn/large/43b712ebjw1ewke8muhj3j209w02mwei.jpg" alt="alt" width="356" height="94" data-reactid="73"/><p data-reactid="74"><span class="s1" data-reactid="75">嗯，他的规范来自于DOM文档，那我们继续观摩最新的HTML规范。</span></p><pre data-reactid="76"><code data-query="{}" data-lang="data-lang" data-reactid="77">[NoInterfaceObject, Exposed=(Window,Worker)]
+interface WindowTimers {  
+  long setTimeout(Function handler, optional long timeout = 0, any... arguments);
+  long setTimeout(DOMString handler, optional long timeout = 0, any... arguments);
+  void clearTimeout(optional long handle = 0);
+  long setInterval(Function handler, optional long timeout = 0, any... arguments);
+  long setInterval(DOMString handler, optional long timeout = 0, any... arguments);
+  void clearInterval(optional long handle = 0);
+};
+Window implements WindowTimers;
+</code></pre><p data-reactid="78"><span class="s1" data-reactid="79">我们发现接口windowTimers中重载了setTimeout和setInterval，使他们能够接受Function和DOMString两种不同的参数。</span></p><p data-reactid="80"><span class="s1" data-reactid="81">而当他们接受的参数为string类型时，实际上是执行了eval来解析我们所置入的代码。因此，我们在没有打引号的情况下，事实上是做了和:</span></p><pre data-reactid="82"><code data-query="{}" data-lang="data-lang" data-reactid="83">eval(window.location.href = &#x27;index.php?xxx=111&#x27;);
+</code></pre><p data-reactid="84"><span class="s1" data-reactid="85">差不多的操作，当然没有计时直接执行了。</span></p><p data-reactid="86"><span class="s1" data-reactid="87">而当我们将代码置入一个匿名函数中时，实际上是执行了一个回调，这样比直接置入字符串更加的安全。</span></p><p data-reactid="88"><span class="s1" data-reactid="89">分析了定义以后，我们就可以对setTimeout的用法有一个清晰的认识</span></p><pre data-reactid="90"><code data-query="{}" data-lang="data-lang" data-reactid="91">function fn() {  
+    alert(1);
+}
+setTimeout(&#x27;fn()&#x27;, 5000);  
+// after 5s ，alert 1;
+
+function fn() {  
+    alert(1);
+}
+setTimeout(fn, 5000);  
+// after 5s ，alert 1;
+
+setTimeout(function () {  
+    alert(1);
+}, 5000);
+// after 5s ，alert 1;
+
+setTimeout(&#x27;alert(1)&#x27;, 5000);  
+// after 5s ，alert 1;
+</code></pre><p data-reactid="92"><span class="s1" data-reactid="93">嗯，当然了，它还可以带参数写成:</span></p><pre data-reactid="94"><code data-query="{}" data-lang="data-lang" data-reactid="95">setTimeout(func, delay, [param1, param2, ...]);
+</code></pre><p data-reactid="96"><span class="s1" data-reactid="97">这样的形式，不过老生常谈的IE9以下是不支持的。</span></p><p data-reactid="98"><span class="s1" data-reactid="99">好了，说到这里，我们就应该注意到一个关键词“eval”，“eval”可以解析字符串形式的代码，而且是官方不推荐的代码解析方式，会有产生XSS漏洞的危险。那么作为可以在内部解析代码字符串的方法，我们需要给予比较大的关注。</span></p><p data-reactid="100"><span class="s1" data-reactid="101">同样能够解析代码的有以下一些对象和方法:</span></p><pre data-reactid="102"><code data-query="{}" data-lang="data-lang" data-reactid="103">eval
+
+setTimeout(String)
+
+setInterval(String)
+
+Function
+
+execScript
+
+setImmediate(String)
+</code></pre><p data-reactid="104"><span class="s1" data-reactid="105"><!-- react-text: 106 -->关于execScript，安利一篇老文章，<!-- /react-text --><a href="http://ued.sina.com/?p=789" data-reactid="107"><span class="s2" data-reactid="108">点我查看</span></a></span></p><p data-reactid="109"><span class="s1" data-reactid="110"><!-- react-text: 111 -->关于setImmediate,<!-- /react-text --><a href="http://www.cnblogs.com/fsjohnhuang/p/4151595.html" data-reactid="112"><span class="s2" data-reactid="113">点我查看</span></a></span></p></article><div data-reactid="114"></div><nav class="single-bar clearfix" data-reactid="115"><span class="prev" data-reactid="116"><a rel="prev" href="/blog/fe/data-visulization-with-javascript-translation" data-reactid="117"><em class="eux-icon eux-icon-page-prev" data-reactid="118"></em><!-- react-text: 119 -->Data Visulization with JavaScript 翻译<!-- /react-text --></a></span><span class="next" data-reactid="120"><a rel="next" href="/blog/fe/use-jquery-to-achieve-a-simple-data-binding" data-reactid="121"><em class="eux-icon eux-icon-page-next" data-reactid="122"></em><!-- react-text: 123 -->利用jQuery实现简单的数据双向绑定<!-- /react-text --></a></span></nav></div></div></div><footer class="footer" data-reactid="124"><div class="eux-footer-area-wrapper container-singular" role="complementary" data-reactid="125"><div class="inner clearfix" data-reactid="126"><aside id="simple-links-2" class="widget sl-links-main" data-reactid="127"><h2 class="widgettitle" data-reactid="128">友情链接</h2><ul class="simple-links-list simple-links-2-list" id="simple-links-2-list" data-reactid="129"><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="130"><a target="_blank" href="http://sux.baidu.com/" title="百度 FEX 团队" data-reactid="131">百度 FEX</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="132"><a target="_blank" href="http://efe.baidu.com/" title="百度 EFE 团队" data-reactid="133">百度 EFE</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="134"><a target="_blank" href="http://sux.baidu.com/" title="百度 SUX 团队" data-reactid="135">百度 SUX</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="136"><a target="_blank" href="https://aotu.io/" title="京东凹凸实验室，面向多终端技术体系，致力于构建沉淀与分享包括但不限于交互、页面制作技巧、前端开发、原生APP开发等方面的专业知识及案例。" data-reactid="137">凹凸实验室</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="138"><a target="_blank" href="https://fed.renren.com/" title="人人网FED" data-reactid="139">人人网FED</a></li></ul></aside></div></div><div class="eux-icp" data-reactid="140"><!-- react-text: 141 -->百度EUX 版权所有 ©百度EUX    All rights reserved. 骄傲地采用 <!-- /react-text --><a target="_blank" href="https://github.com/picidaejs/picidaejs" data-reactid="142">Picidae</a><!-- react-text: 143 -->。<!-- /react-text --></div></footer></div>
+</div>
+<script src="/PICIDAE_COMMON.js"></script>
+<script src="/PICIDAE_ENTRY.js"></script>
+</body>
+</html>

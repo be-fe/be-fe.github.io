@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> [译] 使用SMIL实现SVG动画 | 百度EUX </title>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?d232748d06c1fe09a6db3db0077669b7";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+
+      var _vds = _vds || [];
+      window._vds = _vds;
+      (function () {
+        _vds.push(['setAccountId', '66707fb8b27442d5b3ccca57a56800fa']);
+        _vds.push(['trackBot', false]);
+
+        (function () {
+          var vds = document.createElement('script');
+          vds.type = 'text/javascript';
+          vds.async = true;
+          vds.src = '//dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();
+    </script>
+</head>
+<body>
+<div id="root">
+    <div class="main" data-reactroot="" data-reactid="1" data-react-checksum="-1714131548"><!-- react-empty: 2 --><header class="eux-header clearfix" data-reactid="3"><div class="eux-header-top" data-reactid="4"><a href="javascript:void(0);" class="eux-portable-menu" data-reactid="5"><span data-reactid="6"></span><span data-reactid="7"></span><span data-reactid="8"></span></a><!-- react-empty: 9 --><nav class="menu-primary-container" data-reactid="10"><ul id="menu-primary" class="menu" data-reactid="11"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-25" data-reactid="12"><a href="/" data-reactid="13">HOME</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-45" data-reactid="14"><a href="/" data-reactid="15">BLOG</a><ul class="sub-menu" data-reactid="16"><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="17"><a href="/ue" data-reactid="18">交互</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="19"><a href="/ui" data-reactid="20">视觉</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="21"><a href="/fe" data-reactid="22">前端</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="23"><a href="/team" data-reactid="24">团队</a></li></ul></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-46" data-reactid="25"><a href="/tools" data-reactid="26">TOOLS</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112" data-reactid="27"><a href="/works" data-reactid="28">WORKS</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-138" data-reactid="29"><a href="/jobs" data-reactid="30">JOBS</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-50" data-reactid="31"><a href="/about-us" data-reactid="32">ABOUT US</a></li></ul></nav></div></header><div class="eux-singular clearfix" data-reactid="33"><div class="container-singular clearfix" data-reactid="34"><nav class="menu-categories-container" data-reactid="35"><ul id="menu-categories" class="menu" data-reactid="36"><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="37"><span data-reactid="38"><a href="/" data-reactid="39">全部</a></span></li><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="40"><span data-reactid="41"><a href="/ue" data-reactid="42">交互</a></span></li><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="43"><span data-reactid="44"><a href="/ui" data-reactid="45">视觉</a></span></li><li class="current-menu-item menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="46"><span data-reactid="47"><a href="/fe" data-reactid="48">前端</a></span></li><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="49"><span data-reactid="50"><a href="/team" data-reactid="51">团队</a></span></li></ul></nav><div class="inner clearfix" data-reactid="52"><div class="article-meta" data-reactid="53"><h1 class="title" data-reactid="54">[译] 使用SMIL实现SVG动画</h1><div class="eux-page-detail" data-reactid="55"><span data-reactid="56"><em data-reactid="57">by.</em><!-- react-text: 58 -->莳子<!-- /react-text --></span><span data-reactid="59">2015-12-25</span></div></div><article data-reactid="60"><h2 id="概览" data-reactid="61"><a href="#%E6%A6%82%E8%A7%88" aria-hidden="true" data-reactid="62"><span class="icon icon-link" data-reactid="63"></span></a><!-- react-text: 64 -->概览<!-- /react-text --></h2><p data-reactid="65">SVG图形可以通过动画元素来生成动画。什么是动画元素呢？动画元素是由同步多媒体整合语言(SMIL, Synchronized Multimedia Integration Language)引入的，SMIL可以让你在元素的属性上（比如位置，选择，颜色），或者某个路径上实现动画。SMIL中的动画元素包括：</p><ul data-reactid="66"><li data-reactid="67"><animate data-reactid="68">可用于针对某个纯量属性在一定时间内的动画实现</animate></li><li data-reactid="69"><set data-reactid="70">是animate的一种简写，在类似visibility这类非数值属性上的动画实现中使用会比较方便</set></li><li data-reactid="71"><animatemotion data-reactid="72">可将元素沿指定路径移动</animatemotion></li><li data-reactid="73"><animatecolor data-reactid="74">用于颜色的动画实现，要注意的是，尽管这个元素现仍存在于SVG1.1文档里，但它实际上已被移除</animatecolor></li></ul><p data-reactid="75">除了这些SMIL文档里的动画元素，SVG还提供了一些与之兼容的拓展。比如：</p><ul data-reactid="76"><li data-reactid="77"><animatetransform data-reactid="78">可用于在诸如transform的属性上实现动画;</animatetransform></li><li data-reactid="79">path(属性)可以让我们把SVG里的路径设置语法在某种程度上用于animationMotion元素的动画；</li><li data-reactid="80"><mpath data-reactid="81">通常与animateMotion元素连用，用于指向某个路径。该元素需要包含在animateMotion元素中；</mpath></li><li data-reactid="82">keypoints（属性）作为animateMotion的属性值使用，用于精确控制动作路径上动画的速度；</li><li data-reactid="83">rotate(属性)作为animateMotion的属性值使用，用于指定对象是否随着路径变换自动旋转。也就是说，对象的x轴方向是否和动作路径的切线方向保持一致，这一点在控制动作路径上的动画的时候非常关键，在后面的animateMotion章节里会有更多介绍。</li></ul><p data-reactid="84">在某种程度上，SVG动画跟CSS动画很相似，但是SVG动画可以实现一些CSS动画无法实现的功能。</p><h2 id="为什么要使用svg动画" data-reactid="85"><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8svg%E5%8A%A8%E7%94%BB" aria-hidden="true" data-reactid="86"><span class="icon icon-link" data-reactid="87"></span></a><!-- react-text: 88 -->为什么要使用SVG动画<!-- /react-text --></h2><p data-reactid="89">尽管我们是可以通过CSS来控制SVG的样式和动画，比如说，一般在HTML可以使用的变化和变换也是同样适用于SVG元素的，但是仍然有一些SVG属性是不能通过CSS去控制的，比如SVG路径就涉及到用data(d=””)属性去定义路径形状，然而这种属性是可以通过SMIL去控制的。换句话说，SVG元素是通过SVG表现属性(SVG presentation attributes)来描述的，这些表现属性中的一部分可以通过CSS控制，但其余部分就无法通过CSS控制。</p><p data-reactid="90">这也就意味这，有不少动画效果是无法通过CSS来完成。如果你希望能够控制那些无法直接通过CSS实现的属性，可以用JS去实现，也可以用SMIL里的动画去实现。如果你更想用JS,你可以考虑使用被称作是“SVG领域中的jQuery”的snap.svg，其例子可参考这里。不过如果你更想使用偏向于描述动画的方式的话，那就可以使用这篇文章接下来会介绍到的方法。</p><p data-reactid="91">另外值得一提的是，使用SMIL比起使用JS的优势还在于，如果SVG是在CSS中以img或者background-image的形式嵌入页面的话，js动画就不起作用了，然后SMIL动画则在这两种情况下都没有问题（浏览器支持的前提下），在我看来，这也是SMIL的一个大优势。</p><h2 id="浏览器兼容" data-reactid="92"><a href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%85%BC%E5%AE%B9" aria-hidden="true" data-reactid="93"><span class="icon icon-link" data-reactid="94"></span></a><!-- react-text: 95 -->浏览器兼容<!-- /react-text --></h2><p data-reactid="96">除了IE和Opera Mini以外，浏览器对SMIL动画的支持还是不错的。详情可以参考这里。如果你需要为SMIL动画提供备选方案，可以使用Modernizr来检测浏览器是否支持，如果不支持的话可以采用JS动画或者静态图片等等其他方式。</p><h2 id="实际应用" data-reactid="97"><a href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8" aria-hidden="true" data-reactid="98"><span class="icon icon-link" data-reactid="99"></span></a><!-- react-text: 100 -->实际应用<!-- /react-text --></h2><h3 id="使用xlinkhref指定动画目标" data-reactid="101"><a href="#%E4%BD%BF%E7%94%A8xlinkhref%E6%8C%87%E5%AE%9A%E5%8A%A8%E7%94%BB%E7%9B%AE%E6%A0%87" aria-hidden="true" data-reactid="102"><span class="icon icon-link" data-reactid="103"></span></a><!-- react-text: 104 -->使用xlink:href指定动画目标<!-- /react-text --></h3><p data-reactid="105">不论你想使用哪个动画元素，你都需要先指定动画目标。指定动画目标的第一种方式就是使用xlink:href，为这个属性设置动画目标的URI地址即可。要注意的是，目标元素必须是当前SVG文档片段中的一部分。</p><pre data-reactid="106"><code data-query="{}" data-lang="data-lang" data-reactid="107">&lt;rect id=&quot;cool_shape&quot; ... /&gt;
+&lt;animation xlink:href=&quot;#cool_shape&quot; .../&gt;
+</code></pre><p data-reactid="108">如果你之前接触过SVG动画元素的话，你可以就已经见过第二种指定目标元素的方式，那就是将动画元素是嵌套在目标元素中。因为如果没有明确指定xlink:href的值，那么目标元素就是当前动画元素的最近一层父元素。</p><pre data-reactid="109"><code data-query="{}" data-lang="data-lang" data-reactid="110">&lt;rect id=&quot;cool_shape&quot; ...&gt;
+ &lt;animation ... /&gt;
+&lt;/rect&gt;
+</code></pre><p data-reactid="111">以上这两种指定目标元素的方式都是可行的。</p><h3 id="使用attributename和attributetype指定动画属性" data-reactid="112"><a href="#%E4%BD%BF%E7%94%A8attributename%E5%92%8Cattributetype%E6%8C%87%E5%AE%9A%E5%8A%A8%E7%94%BB%E5%B1%9E%E6%80%A7" aria-hidden="true" data-reactid="113"><span class="icon icon-link" data-reactid="114"></span></a><!-- react-text: 115 -->使用attributeName和attributeType指定动画属性<!-- /react-text --></h3><p data-reactid="116"><!-- react-text: 117 -->动画元素还有一个共有的属性：attributeName，用来指定你想要实现动画的属性。比如，当你想要在水平方向移动<!-- /react-text --><circle data-reactid="118"></circle><!-- react-text: 119 -->时，就可以给attributeName属性赋值为cx。<!-- /react-text --></p><p data-reactid="120">要注意的是，attributeName一次只能接受一个值，如果你想要对多个属性规定动画，那就要为这个目标元素定义多个动画，这一点相比CSS就有些不那么方便，不过考虑到其他可能存在的动画属性（稍后会提到），每次只能为attributeName赋一个值确实是有利于避免过于复杂。</p><p data-reactid="121">另外，当你指定属性名是，你也可以增加一个XML命名空间(XMLNS, XML namespace)前缀来表明这个属性的命名空间，比如用attributeType。举例而言，如果有些属性是属于CSS命名空间的（意味着这些属性也是可以在CSS属性里的），其余的属性就只能是XML里的。（相关对比信息可以看这里）。如果没有明确指定attributeType的值或设为auto时，浏览器会先从CSS属性中寻找匹配的属性名，如果没有找到，就继续在默认的XML命名空间里寻找。</p><p data-reactid="122">举个例子，以下代码是用于在opacity属性上添加动画，因为我们知道opacity属性是存在于CSS中的，所以我们可以把attributeType设为CSS命名空间：</p><pre data-reactid="123"><code data-query="{}" data-lang="data-lang" data-reactid="124">&lt;rect ...&gt;
+ &lt;animate attributeType=&quot;CSS&quot; attributeName=&quot;opacity&quot; from=&quot;1&quot; to=&quot;0&quot; dur=&quot;5s&quot; repeatCount=&quot;indefine&quot;/&gt;
+&lt;/rect&gt;
+</code></pre><h3 id="使用fromtodurationfillby指定动画的状态" data-reactid="125"><a href="#%E4%BD%BF%E7%94%A8fromtodurationfillby%E6%8C%87%E5%AE%9A%E5%8A%A8%E7%94%BB%E7%9A%84%E7%8A%B6%E6%80%81" aria-hidden="true" data-reactid="126"><span class="icon icon-link" data-reactid="127"></span></a><!-- react-text: 128 -->使用from,to,duration,fill,by指定动画的状态<!-- /react-text --></h3><p data-reactid="129">我们从一个简单的例子开始熟悉这些属性，首先我们来尝试通过改变一个圆的cx属性在水平轴上移动它的位置。</p><p data-reactid="130"><!-- react-text: 131 -->我们将使用<!-- /react-text --><animate data-reactid="132"><!-- react-text: 133 -->这个动画元素来实现这个动画，<!-- /react-text --><animate data-reactid="134"><!-- react-text: 135 -->元素通常用于对数值和颜色实施动画，而且正如我们之前提到过的，每个<!-- /react-text --><animate data-reactid="136">每次只能用于对一个属性进行动画设置。</animate></animate></animate></p><p data-reactid="137">总的来说，为了让某个属性的值在一段时间内变成另一个值，通常会使用到from,to,dur，另外你也可以通过begin来制定何时开始动画。</p><pre data-reactid="138"><code data-query="{}" data-lang="data-lang" data-reactid="139">&lt;circle id=&quot;my-circle&quot; r=&quot;30&quot; cx=&quot;50&quot; cy=&quot;50&quot; fill=&quot;orange&quot; /&gt;
+ &lt;animate 
+ xlink:href=&quot;#my-circle&quot;
+ attributeName=&quot;cx&quot;
+ from=&quot;50&quot;
+ to=&quot;450&quot; 
+ dur=&quot;1s&quot;
+ begin=&quot;click&quot;
+ fill=&quot;freeze&quot; /&gt;
+</code></pre><p data-reactid="140">在animate元素里，begin的值是设为click，这个值代表目标元素circle会在点击后开始移动。你也可以把这个值设置成具体的时间，比如begin=”0s”代表这个动画会在页面加载完毕后马上执行，类似地，你也可以通过begin=”2s”这样的方式来延迟动画开始。</p><p data-reactid="141">begin属性里更有意思的是你可以给它赋click+1s这样的值，这样你就可以在元素被点击后，再延迟1s来开始动画。除此之外，你还可以通过这个属性来跟其他的动画达成同步，稍后会细讲。</p><p data-reactid="142">其他的属性，比如from,to,dur跟CSS动画里的keyframe中的from、to， animation-duration意思是类似的。</p><p data-reactid="143"><!-- react-text: 144 -->不过fill属性会稍微有点不一样，因为它看起来跟SVG中用来设置填充颜色的属性是一样的，不过在<!-- /react-text --><animate data-reactid="145">中，它代表的是元素是否在动画结束后变成初始状态，此时它有两个值：</animate></p><ul data-reactid="146"><li data-reactid="147">freeze 代表动画效果将保持动画结束时的状态，在之后处于冻结状态（除非重启动画）</li><li data-reactid="148">remove 代表当动画结束后，动画过程中实施的效果会被移除（除非重启动画）</li></ul><p data-reactid="149">by属性显然就是用来表示相对变化的了，by的效果几乎只有在非关联步骤中可以看到，有点像CSS中的steps()，SVG里有一个跟CSS里的steps()相对应的设置calcMode=”discrete”，后面会细讲。</p><p data-reactid="150">by属性设置的另一个体现在于当你仅指定了to属性，后面会结合set元素一起看个例子。</p><p data-reactid="151">关于by还有一点要提的是，当你要实现附加动画和累加动画的时候比较有用。这一点会在介绍附加动画和累加动画的时候具体讲。</p><h3 id="使用restart重新开始动画" data-reactid="152"><a href="#%E4%BD%BF%E7%94%A8restart%E9%87%8D%E6%96%B0%E5%BC%80%E5%A7%8B%E5%8A%A8%E7%94%BB" aria-hidden="true" data-reactid="153"><span class="icon icon-link" data-reactid="154"></span></a><!-- react-text: 155 -->使用restart重新开始动画<!-- /react-text --></h3><p data-reactid="156">有时候我们会需要保证动画在进行过程中不能被重新触发开始，这一点可以通过设置restart属性来实现，它的可能值有：</p><ul data-reactid="157"><li data-reactid="158">always：默认值，代表动画可以随时重新开始;</li><li data-reactid="159">whenNotActive： 代表只有在动画处于非激活状态时才可以重新开始，如果动画正在进行中，将会忽略触发它重新开始的事件;</li><li data-reactid="160">never动画将在整个容器时间段内无法重新开始（对于SVG文档片段来说，意味着整个文档过程中将不能重启动画）;</li></ul><h3 id="为动画命名并关联多个动画" data-reactid="161"><a href="#%E4%B8%BA%E5%8A%A8%E7%94%BB%E5%91%BD%E5%90%8D%E5%B9%B6%E5%85%B3%E8%81%94%E5%A4%9A%E4%B8%AA%E5%8A%A8%E7%94%BB" aria-hidden="true" data-reactid="162"><span class="icon icon-link" data-reactid="163"></span></a><!-- react-text: 164 -->为动画命名并关联多个动画<!-- /react-text --></h3><p data-reactid="165">当我们想要实施多个动画的时候，比如我们不仅要移动一个圆，还想要在位置移动结束后改变圆的填充色，如果用CSS思路来实现的话，我们可能会把改变颜色的begin值设为位置移动时长。 但是在SMIL中有一种类似事件处理的机制：我们之前提到过可以把click+5s这样的值赋给begin，这样的值叫做“事件值(event value)”，也就是说一个事件后还有一个“时刻值(clock value)”，为什么叫“时刻值”而不是“时间值(time value)”呢，原因在于，你确实可以写成“10min”或者”01:33″（1分钟33秒），甚至可以写成“02:30:01”，不过这种写法并不是所有的浏览器都支持。所以如果浏览器支持的话，写成click+01:30代表动画会在点击后的1分30秒后执行。</p><p data-reactid="166">另外一种关联多个动画的方式是“事件+另一个动画的ID”，比如你有多个动画（不论是否是同一个目标元素），你想让他们产生关联，比如动画A在动画B结束后开始，使用这种方式的话你就不需要知道其他动画的时长了。</p><p data-reactid="167">举个栗子：</p><pre data-reactid="168"><code data-query="{}" data-lang="data-lang" data-reactid="169">&lt;circle id=&quot;orange-circle&quot; r=&quot;30&quot; cx=&quot;50&quot; cy=&quot;50&quot; fill=&quot;orange&quot; /&gt;
+</code></pre><pre data-reactid="170"><code data-query="{}" data-lang="data-lang" data-reactid="171">&lt;rect id=&quot;blue-rectangle&quot; width=&quot;50&quot; height=&quot;50&quot; x=&quot;25&quot; y=&quot;200&quot; fill=&quot;#0099cc&quot;&gt;&lt;/rect&gt;
+</code></pre><pre data-reactid="172"><code data-query="{}" data-lang="data-lang" data-reactid="173">&lt;animate 
+ xlink:href=&quot;#orange-circle&quot;
+ attributeName=&quot;cx&quot;
+ from=&quot;50&quot;
+ to=&quot;450&quot; 
+ dur=&quot;5s&quot;
+ begin=&quot;click&quot;
+ fill=&quot;freeze&quot; 
+ id=&quot;circ-anim&quot; /&gt;
+</code></pre><pre data-reactid="174"><code data-query="{}" data-lang="data-lang" data-reactid="175">&lt;animate 
+ xlink:href=&quot;#blue-rectangle&quot;
+ attributeName=&quot;x&quot; 
+ from=&quot;50&quot;
+ to=&quot;425&quot; 
+ dur=&quot;5s&quot;
+ begin=&quot;circ-anim.begin + 1s&quot;
+ fill=&quot;freeze&quot; 
+ id=&quot;rect-anim&quot; /&gt;
+</code></pre><p data-reactid="176">上面这段代码以为这蓝色方块将在橙色圆形的动画开始后的1s时开始。</p><p data-reactid="177">类似的还可以是在动画结束前的前3s开始另一个动画：</p><pre data-reactid="178"><code data-query="{}" data-lang="data-lang" data-reactid="179">&lt;animate 
+ xlink:href=&quot;#blue-rectangle&quot;
+ attributeName=&quot;x&quot; 
+ from=&quot;50&quot;
+ to=&quot;425&quot; 
+ dur=&quot;5s&quot;
+ begin=&quot;circ-anim.end - 3s&quot;
+ fill=&quot;freeze&quot; 
+ id=&quot;rect-anim&quot;/&gt;
+</code></pre><h3 id="使用repeatcount重复执行动画" data-reactid="180"><a href="#%E4%BD%BF%E7%94%A8repeatcount%E9%87%8D%E5%A4%8D%E6%89%A7%E8%A1%8C%E5%8A%A8%E7%94%BB" aria-hidden="true" data-reactid="181"><span class="icon icon-link" data-reactid="182"></span></a><!-- react-text: 183 -->使用repeatCount重复执行动画<!-- /react-text --></h3><p data-reactid="184">如果你想重复执行动画，可以使用repeatCount属性，其对应的值可以是某个具体的数字，也可以是一些特殊的关键字，如indefinite来一直重复动画。</p><pre data-reactid="185"><code data-query="{}" data-lang="data-lang" data-reactid="186">&lt;animate 
+ xlink:href=&quot;#orange-circle&quot;
+ attributeName=&quot;cx&quot;
+ from=&quot;50&quot;
+ to=&quot;450&quot; 
+ dur=&quot;5s&quot;
+ begin=&quot;click&quot;
+ repeatCount=&quot;2&quot;
+ fill=&quot;freeze&quot; 
+ id=&quot;circ-anim&quot; /&gt;
+</code></pre><p data-reactid="187">有一点值得注意的是，动画在重复执行时，每一次都是从from这个值重新开始，而并不能从之前一次的动画结束点开始，这一点相比CSS的animation-direction:alternate就有些不便了。如果在SMIL中要达到类似的效果，就需要用JS来设置from和to值的变化了。相关方法可以看这里。</p><p data-reactid="188">还有一种技巧是把中间时间对应的值设为结束值，开始时间和结束时间对应的值都设为起始值，如果用keyframe来理解的话看起来就是这样的：</p><pre data-reactid="189"><code data-query="{}" data-lang="data-lang" data-reactid="190">@keyframes example {
+ from, to {
+ left: 0;
+ }
+</code></pre><pre data-reactid="191"><code data-query="{}" data-lang="data-lang" data-reactid="192">50% {
+ left: 300px;
+ }
+}
+</code></pre><p data-reactid="193">但是这个方法并不适用于所有场景，要具体场景具体分析。</p><h3 id="使用repeatdur限制动画重复时长" data-reactid="194"><a href="#%E4%BD%BF%E7%94%A8repeatdur%E9%99%90%E5%88%B6%E5%8A%A8%E7%94%BB%E9%87%8D%E5%A4%8D%E6%97%B6%E9%95%BF" aria-hidden="true" data-reactid="195"><span class="icon icon-link" data-reactid="196"></span></a><!-- react-text: 197 -->使用repeatDur限制动画重复时长<!-- /react-text --></h3><p data-reactid="198">有时候如果一个时间比较长的动画一直重复的话可能会影响用户体验，所以可能会需要把动画重复的时间限制在一定范围内，即达到某个时间点后（相对于文档加载开始这个时间点而言）停止动画重复。这个时间范围我们称之为“表现时间(presentation time)。”，注意，这个时间是相对于整个文档片段的开始时间，而非某个动画的开始时间。</p><pre data-reactid="199"><code data-query="{}" data-lang="data-lang" data-reactid="200">&lt;animate 
+ xlink:href=&quot;#orange-circle&quot;
+ attributeName=&quot;cx&quot;
+ from=&quot;50&quot;
+ to=&quot;450&quot; 
+ dur=&quot;2s&quot;
+ begin=&quot;0s&quot;
+ repeatCount=&quot;indefinite&quot;
+ repeatDur=&quot;01:30&quot; 
+ fill=&quot;freeze&quot; 
+ id=&quot;circ-anim&quot; /&gt;
+</code></pre><p data-reactid="201">上面这个例子就会在页面加载后的1分30秒后停止动画。</p><h3 id="基于重复次数同步多个动画" data-reactid="202"><a href="#%E5%9F%BA%E4%BA%8E%E9%87%8D%E5%A4%8D%E6%AC%A1%E6%95%B0%E5%90%8C%E6%AD%A5%E5%A4%9A%E4%B8%AA%E5%8A%A8%E7%94%BB" aria-hidden="true" data-reactid="203"><span class="icon icon-link" data-reactid="204"></span></a><!-- react-text: 205 -->基于重复次数同步多个动画<!-- /react-text --></h3><p data-reactid="206">之前我们提到过可以通过给begin属性设置值使不同动画产生关联，我们也可以类似地通过重复次数来同步动画：</p><pre data-reactid="207"><code data-query="{}" data-lang="data-lang" data-reactid="208">&lt;animate 
+ xlink:href=&quot;#blue-rectangle&quot;
+ attributeName=&quot;x&quot; 
+ from=&quot;50&quot;
+ to=&quot;425&quot; 
+ dur=&quot;5s&quot;
+ begin=&quot;circ-anim.repeat(2)&quot;
+ fill=&quot;freeze&quot; 
+ id=&quot;rect-anim&quot; /&gt;
+</code></pre><p data-reactid="209">这个例子中的begin值设定意味着它的目标元素会在circ-anim的动画重复了两次后开始。</p><h3 id="使用keytimes和values控制动画帧" data-reactid="210"><a href="#%E4%BD%BF%E7%94%A8keytimes%E5%92%8Cvalues%E6%8E%A7%E5%88%B6%E5%8A%A8%E7%94%BB%E5%B8%A7" aria-hidden="true" data-reactid="211"><span class="icon icon-link" data-reactid="212"></span></a><!-- react-text: 213 -->使用keyTimes和values控制动画帧<!-- /react-text --></h3><p data-reactid="214">我们知道，在CSS动画中一般是这样设置动画帧：</p><pre data-reactid="215"><code data-query="{}" data-lang="data-lang" data-reactid="216">@keyframes example {
+ 0% {
+ left: 0;
+ }
+ 50% {
+ left: 320px;
+ }
+ 80% {
+ left: 270px;
+ }
+ 100% {
+ left: 300px;
+ }
+}
+</code></pre><p data-reactid="217">在SMIL中，你也可以类似地控制动画，不过语法却大不相同。我们将使用keyTimes来制定帧的节点，用values来指定对应的值，所以在SMIL中是像这样控制动画帧的：</p><pre data-reactid="218"><code data-query="{}" data-lang="data-lang" data-reactid="219">&lt;animate 
+ xlink:href=&quot;#orange-circle&quot;
+ attributeName=&quot;cx&quot;
+ from=&quot;50&quot;
+ to=&quot;450&quot; 
+ dur=&quot;2s&quot;
+ begin=&quot;click&quot;
+ values=&quot;50; 490; 350; 450&quot;
+ keyTimes=&quot;0; 0.5; 0.8; 1&quot;
+ fill=&quot;freeze&quot; 
+ id=&quot;circ-anim&quot; /&gt;
+</code></pre><p data-reactid="220">在上面这个例子中的keyTimes和values的值都是以列表的形式出现的，keyTimes中的每个值对应一个values里的值。keyTimes里的值是一个介于0和1之间的小数，代表着占全部时长的比例，整体来说还是跟CSS的帧控制比较相似的。</p><p data-reactid="221">要注意的是，如果定义了values，那么from,’to’,’by’都会被忽略。另外，keyTimes不是必须要设定的，如果你已经写明了values，那么其值根据values的值平均分配到不同的时间点上。</p><h3 id="使用calcmode和keysplines控制动画节奏" data-reactid="222"><a href="#%E4%BD%BF%E7%94%A8calcmode%E5%92%8Ckeysplines%E6%8E%A7%E5%88%B6%E5%8A%A8%E7%94%BB%E8%8A%82%E5%A5%8F" aria-hidden="true" data-reactid="223"><span class="icon icon-link" data-reactid="224"></span></a><!-- react-text: 225 -->使用calcMode和keySplines控制动画节奏<!-- /react-text --></h3><p data-reactid="226">我们都知道，在CSS中可以使用animation-timing-function来控制动画节奏，比如通过使用特定关键字或者定义贝塞尔函数来实现不同动画节奏。</p><p data-reactid="227">在SMIL中，是通过calcMode来做这件事的，其默认值是linear（animateMotion除外，稍后会细说），其他的值还包括：discrete,paced,spline：</p><p data-reactid="228">discrete意味着动画将直接从一个值变为另一个值，有点类似于CSS里的steps()；</p><p data-reactid="229">paced有点像linear，只不过它会忽略keyTimes中定义的中间步骤。设定属性值为paced之后会计算随后的值并相应地分配时间。如果你的values里面本身就是线性模式的话，用paced和linear并没有什么区别。</p><p data-reactid="230">spline会根据贝塞尔曲线的设定将一个值过渡到下一个值。具体来讲，曲线的时间点在keyTimes中定义，具体的控制则是在keySplines属性中完成。</p><p data-reactid="231">什么是keySplines呢？先来看看它在CSS中对应的是什么吧：</p><pre data-reactid="232"><code data-query="{}" data-lang="data-lang" data-reactid="233">@keyframes bounce {
+ 0% {
+ top: 0;
+ animation-timing-function: ease-in;
+ }
+ 15% {
+ top: 200px;
+ animation-timing-function: ease-out;
+ }
+ 30% {
+ top: 70px;
+ animation-timing-function: ease-in;
+ }
+ 45% {
+ top: 200px;
+ animation-timing-function: ease-out;
+ }
+ 60% {
+ top: 120px;
+ animation-timing-function: ease-in;
+ }
+ 75% {
+ top: 200px;
+ animation-timing-function: ease-out;
+ }
+ 90% {
+ top: 170px;
+ animation-timing-function: ease-in;
+ }
+ 100% {
+ top: 200px;
+ animation-timing-function: ease-out;
+ }
+}
+</code></pre><p data-reactid="234">在CSS中，你可以像上面的例子那样为每个帧时间点设置动画速度，当然你也可以写成具体的贝塞尔函数：</p><p data-reactid="235">ease-in = cubic-bezier(0.47, 0, 0.745, 0.715)</p><p data-reactid="236">ease-out = cubic-bezier(0.39, 0.575, 0.565, 1)</p><p data-reactid="237">那么在SMIL中怎么实现呢？我们先定义好一些keyTimes和values的值：</p><pre data-reactid="238"><code data-query="{}" data-lang="data-lang" data-reactid="239">&lt;animate 
+ xlink:href=&quot;#orange-circle&quot;
+ attributeName=&quot;cy&quot;
+ from=&quot;50&quot;
+ to=&quot;250&quot; 
+ dur=&quot;3s&quot;
+ begin=&quot;click&quot;
+ values=&quot;50; 250; 120;250; 170; 250; 210; 250&quot;
+ keyTimes=&quot;0; 0.15; 0.3; 0.45; 0.6; 0.75; 0.9; 1&quot;
+ fill=&quot;freeze&quot; 
+ id=&quot;circ-anim&quot; /&gt;
+</code></pre><p data-reactid="240">现在我们来添加keySplines属性。keySplines接受一系列的贝塞尔控制点，每个控制点（control points）由四个值组成：x1, x2, y1, y2，这四个值用来描述某个时间区间的贝塞尔变化，这些值必须是在0到1之间，而且如果没有设置calcMode为spline的话这些值都将被忽略。</p><p data-reactid="241">上面我们谈到keySplines接受一系列的贝塞尔控制点，具体而言，keySplines需要两个控制点来绘制曲线。通过Lea的贝塞尔曲线工具我们看到，相同颜色的坐标代表对应的相同点：</p><p data-reactid="242">img</p><p data-reactid="243">所以要把我们上面的例子改为SMIL动画的话将会是这样：</p><pre data-reactid="244"><code data-query="{}" data-lang="data-lang" data-reactid="245">&lt;animate 
+ xlink:href=&quot;#orange-circle&quot;
+ attributeName=&quot;cy&quot;
+ from=&quot;50&quot;
+ to=&quot;250&quot; 
+ dur=&quot;3s&quot;
+ begin=&quot;click&quot;
+ values=&quot;50; 250; 120;250; 170; 250; 210; 250&quot;
+ keyTimes=&quot;0; 0.15; 0.3; 0.45; 0.6; 0.75; 0.9; 1&quot;
+ keySplines=&quot;.42 0 1 1;
+ 0 0 .59 1;
+ .42 0 1 1;
+ 0 0 .59 1;
+ .42 0 1 1;
+ 0 0 .59 1;
+ .42 0 1 1;
+ 0 0 .59 1;&quot;
+ fill=&quot;freeze&quot; 
+ id=&quot;circ-anim&quot;/&gt;
+</code></pre><p data-reactid="246">当然如果你只想在整个动画过程中采取一种贝塞尔函数的话，你仍然要规定keyTimes属性值，不过只需要规定0;1即可，不用插入中间值。</p><h3 id="使用additive和accumulate完成附加动画和累加动画" data-reactid="247"><a href="#%E4%BD%BF%E7%94%A8additive%E5%92%8Caccumulate%E5%AE%8C%E6%88%90%E9%99%84%E5%8A%A0%E5%8A%A8%E7%94%BB%E5%92%8C%E7%B4%AF%E5%8A%A0%E5%8A%A8%E7%94%BB" aria-hidden="true" data-reactid="248"><span class="icon icon-link" data-reactid="249"></span></a><!-- react-text: 250 -->使用additive和accumulate完成附加动画和累加动画<!-- /react-text --></h3><p data-reactid="251">有时候我们需要动画能够以它之前的动画结束点作为开始，比如，你需要一个元素的某个属性值一直增加，这个时候我们就需要使用additive和accumulate。</p><p data-reactid="252">跟其他动画一样，你首先要制定from和to的值，然而如果你设置了additive为sum的话，那么这些中间变化的值都将会以最初的动画属性值作为参考值。比如在最开始的移动圆位置的例子中，你规定的cx是50，并且from=”0″,to=”100″，那么实际上圆的移动将会以0+50,100+50作为开始和结束。</p><p data-reactid="253">说白了，additive的属性其实就是规定了from和to的值是否以当前值为参考值，除了可以赋值为sum以外，还可以赋值replace。replace值是默认值，意味着from和to规定的值将替代当前/初始值，没有注意到这一点的话可能会造成动画开始时诡异的移动。</p><p data-reactid="254">话说回来，如果我们想要的效果是重复第二次动画的时候，是以第一次动画结束时的状态为开始呢？这时候就可以使用accumulate。不难理解accumulate属性就是规定动画是否累积，默认值是none，也就是我们之前看过的重复动画的时候都从头开始。不过如果你把这个属性的值改成sum的话，就可以看到每一次动画重复都是以前一次的动画为基点的。不过别忘了有些情况下设置accumulate会失效，比如如果目标属性不支持累加，动画并没有重复，或者是动画仅规定了to属性。</p><h3 id="使用end指定动画结束时间" data-reactid="255"><a href="#%E4%BD%BF%E7%94%A8end%E6%8C%87%E5%AE%9A%E5%8A%A8%E7%94%BB%E7%BB%93%E6%9D%9F%E6%97%B6%E9%97%B4" aria-hidden="true" data-reactid="256"><span class="icon icon-link" data-reactid="257"></span></a><!-- react-text: 258 -->使用end指定动画结束时间<!-- /react-text --></h3><p data-reactid="259">end值跟begin值很类似。也可以设置相对时间，事件值等等。</p><h3 id="使用多个begin和end值来定义动画间隔" data-reactid="260"><a href="#%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AAbegin%E5%92%8Cend%E5%80%BC%E6%9D%A5%E5%AE%9A%E4%B9%89%E5%8A%A8%E7%94%BB%E9%97%B4%E9%9A%94" aria-hidden="true" data-reactid="261"><span class="icon icon-link" data-reactid="262"></span></a><!-- react-text: 263 -->使用多个begin和end值来定义动画间隔<!-- /react-text --></h3><p data-reactid="264">事实上，begin和end属性都可以接受以分号分隔的列表值。此时，每个begin开始值就对应一个end里面的结束值，从而形成“激活态”和“非激活态”。举例来说：</p><pre data-reactid="265"><code data-query="{}" data-lang="data-lang" data-reactid="266">&lt;animateTransform 
+ xlink:href=&quot;#deepPink-rectangle&quot;
+ attributeName=&quot;transform&quot; 
+ attributeType=&quot;XML&quot;
+ type=&quot;rotate&quot;
+ from=&quot;0 75 75&quot;
+ to=&quot;360 75 75&quot; 
+ dur=&quot;2s&quot;
+ begin=&quot;0s; 5s; 9s; 17s;&quot;
+ end=&quot;2s; 8s; 15s; 25s;&quot;
+ fill=&quot;freeze&quot; 
+ restart=&quot;whenNotActive&quot;
+ /&gt;
+</code></pre><p data-reactid="267">在这个例子中，动画就会在0-2秒时执行，然后进入“非激活态”，到第5秒时又进入“激活态”，持续到第8秒，然后再次进入“非激活态”，以此形成动画间隔。</p><p data-reactid="268">也许你会说如果把repeatCount设为indefinite的时候是否可以形成间隔，答案是肯定的，因为有end值，所以它并不会一直进行。</p><h3 id="使用min和max限制激活时长" data-reactid="269"><a href="#%E4%BD%BF%E7%94%A8min%E5%92%8Cmax%E9%99%90%E5%88%B6%E6%BF%80%E6%B4%BB%E6%97%B6%E9%95%BF" aria-hidden="true" data-reactid="270"><span class="icon icon-link" data-reactid="271"></span></a><!-- react-text: 272 -->使用min和max限制激活时长<!-- /react-text --></h3><p data-reactid="273">正如你可以控制动画的重复时间，你还可以限制动画的激活状态。min和max就是用来分别限制动画激活时长的最小值和最大值，两者都可以接受我们刚才提到的”时刻值“。</p><p data-reactid="274">就min而言，它规定了动画激活态的最小值，这个值应当为0或大于0，默认值为0。对于max来说，它规定了动画激活态的最大值，这个值必须大于0，默认值是indefinite。如果同时规定了min和max值，那么max值必须大于min值，否则这两者都会因不符合条件而被忽略。</p><p data-reactid="275">那么，到底什么是元素的激活态呢？我们之前提过基本时长(simple duration，也就是在不考虑任何动画重复的情况下的时长，这个我们使用dur属性规定的)和重复时长(repeat duration). 所以这些不同的时长有什么区别？为什么end属性就能够结束动画？</p><p data-reactid="276">实际情况是这样的，浏览器先首先根据dur，repeatCount，repeatDur，end几个值计算出一个激活时长。然后，将这个激活时长的值跟min和max的值做对比，如果之前算出的这个激活市场在最大值和最小值范围内的话，就保持使用这个先计算出来的激活时长。如果不在这个最大值最小值范围的话，那么就有可能发生以下情况：</p><p data-reactid="277">如果这个首先计算出来的值大于max值，那么元素的激活时长将会被设置为max的值；</p><p data-reactid="278">如果这个首先计算出来的值小于min值，那么元素的激活时长将会被设为min的值，并且，如果元素的重复时长（或者基本时长）比min值大，那么元素将以正常形态进行动画，否则，元素将先正常进行重复时长（或基本时长），然后就根据fill的值被冻结住或消失。</p><p data-reactid="279">如果需要了解更多浏览器如何处理激活时长的话，可以参考这里。</p><h3 id="渐变路径例子" data-reactid="280"><a href="#%E6%B8%90%E5%8F%98%E8%B7%AF%E5%BE%84%E4%BE%8B%E5%AD%90" aria-hidden="true" data-reactid="281"><span class="icon icon-link" data-reactid="282"></span></a><!-- react-text: 283 -->渐变路径例子<!-- /react-text --></h3><p data-reactid="284"><!-- react-text: 285 -->还有一个无法再CSS中实现动画，但是可以在SMIL中实现动画的是SVG<!-- /react-text --><path data-reactid="286"></path><!-- react-text: 287 -->中的d属性（也就是SVG中的<!-- /react-text --><path data-reactid="288"></path><!-- react-text: 289 -->属性），这个属性规定了形状的信息，包括告诉浏览器在哪里进行点或线的绘制。<!-- /react-text --></p><p data-reactid="290">通过对这个属性实施动画，我们可以创造路径渐变效果从而得到形状渐变的效果。不过，为了能够顺利地进行形状转换，开始，结束以及这期间会出现的形状都必须包括相同数量的绘制点，而且顺序需要保持一致。因为形状变化的实质是靠移动这些绘制点来实现的，所以如果缺失这些绘制点或者打乱了他们的顺序，形状就无法正常显示了。</p><p data-reactid="291">具体实现来说，你需要把attributeName的值设为d，把from和to的值设置为开始和结束时的形状，然后在values里把中间形状的值放进去。更详细的介绍还可以看这里。</p><h3 id="使用元素在绝对路径上实现动画" data-reactid="292"><a href="#%E4%BD%BF%E7%94%A8%E5%85%83%E7%B4%A0%E5%9C%A8%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E4%B8%8A%E5%AE%9E%E7%8E%B0%E5%8A%A8%E7%94%BB" aria-hidden="true" data-reactid="293"><span class="icon icon-link" data-reactid="294"></span></a><!-- react-text: 295 -->使用元素在绝对路径上实现动画<!-- /react-text --></h3><p data-reactid="296"><!-- react-text: 297 -->使用<!-- /react-text --><animatemotion data-reactid="298">可以指定路径，并让元素在路径上移动。这个元素接受的属性值跟之前的一样，并且还可以接受keyPoints，rotate，path这三个属性，除此之外，就是calcMode这个属性的默认值变成了paced。</animatemotion></p><h4 id="使用animatemotion可以让元素沿着某条路线移动" data-reactid="299"><a href="#%E4%BD%BF%E7%94%A8animatemotion%E5%8F%AF%E4%BB%A5%E8%AE%A9%E5%85%83%E7%B4%A0%E6%B2%BF%E7%9D%80%E6%9F%90%E6%9D%A1%E8%B7%AF%E7%BA%BF%E7%A7%BB%E5%8A%A8" aria-hidden="true" data-reactid="300"><span class="icon icon-link" data-reactid="301"></span></a><!-- react-text: 302 -->使用<!-- /react-text --><animatemotion data-reactid="303">可以让元素沿着某条路线移动</animatemotion></h4><p data-reactid="304">path用来指定移动的路线，跟在path元素上规定d的方法类似。不过这时候规定的路径值是相对于元素当前的位置而言的。</p><p data-reactid="305">以下图的路径为例：</p><p data-reactid="306">img</p><pre data-reactid="307"><code data-query="{}" data-lang="data-lang" data-reactid="308">&lt;animateMotion 
+ xlink:href=&quot;#circle&quot;
+ dur=&quot;1s&quot;
+ begin=&quot;click&quot;
+ fill=&quot;freeze&quot;
+ path=&quot;M0,0c3.2-3.4,18.4-0.6,23.4-0.6c5.7,0.1,10.8,0.9,16.3,2.3 c13.5,3.5,26.1,9.6,38.5,16.2c12.3,6.5,21.3,16.8,31.9,25.4c10.8,8.7,21,18.3,31.7,26.9c9.3,7.4,20.9,11.5,31.4,16.7
+ c13.7,6.8,26.8,9.7,41.8,9c21.4-1,40.8-3.7,61.3-10.4c10.9-3.5,18.9-11.3,28.5-17.8c5.4-3.7,10.4-6.7,14.8-11.5
+ c1.9-2.1,3.7-5.5,6.5-6.5&quot; /&gt;
+</code></pre><p data-reactid="309">注意看这里的坐标，是以M(moving)开头的，也就是说先移动到(0,0)这个点，然后才开始绘制曲线(curve)的。我们上面也提到过了，这时的path属性是相对于元素的相对位置的，所以刚才提到的(0,0)是圆的初始位置，而不是坐标系的左上角。所以如果你没有指定这个起始点，可能在动画的开始会有诡异的移位，比如：</p><pre data-reactid="310"><code data-query="{}" data-lang="data-lang" data-reactid="311">&lt;path fill=&quot;none&quot; stroke=&quot;#000000&quot; stroke-miterlimit=&quot;10&quot; d=&quot;M100.4,102.2c3.2-3.4,18.4-0.6,23.4-0.6c5.7,0.1,10.8,0.9,16.3,2.3
+ c13.5,3.5,26.1,9.6,38.5,16.2c12.3,6.5,21.3,16.8,31.9,25.4c10.8,8.7,21,18.3,31.7,26.9c9.3,7.4,20.9,11.5,31.4,16.7
+ c13.7,6.8,26.8,9.7,41.8,9c21.4-1,40.8-3.7,61.3-10.4c10.9-3.5,18.9-11.3,28.5-17.8c5.4-3.7,10.4-6.7,14.8-11.5
+ c1.9-2.1,3.7-5.5,6.5-6.5&quot;/&gt;
+</code></pre><p data-reactid="312">这里的初始值是(100.4,102.2)，所以一开始的时候，这个圆会分别向右边和下边移动100,102个单元，然后才开始其他的路径。</p><h4 id="使用指定移动路线" data-reactid="313"><a href="#%E4%BD%BF%E7%94%A8%E6%8C%87%E5%AE%9A%E7%A7%BB%E5%8A%A8%E8%B7%AF%E7%BA%BF" aria-hidden="true" data-reactid="314"><span class="icon icon-link" data-reactid="315"></span></a><!-- react-text: 316 -->使用指定移动路线<!-- /react-text --></h4><p data-reactid="317"><!-- react-text: 318 -->还有一种指定移动路线的方式<!-- /react-text --><mpath data-reactid="319"><!-- react-text: 320 -->，<!-- /react-text --><mpath data-reactid="321"><!-- react-text: 322 -->是<!-- /react-text --><animatemotion data-reactid="323"><!-- react-text: 324 -->的子元素，使用<!-- /react-text --><mpath data-reactid="325">可以引用外部路径：</mpath></animatemotion></mpath></mpath></p><pre data-reactid="326"><code data-query="{}" data-lang="data-lang" data-reactid="327">&lt;animateMotion xlink:href=&quot;#circle&quot; dur=&quot;1s&quot; begin=&quot;click&quot; fill=&quot;freeze&quot;&gt;
+ &lt;mpath xlink:href=&quot;#motionPath&quot; /&gt;
+&lt;/animateMotion&gt;
+</code></pre><h4 id="的覆盖规则" data-reactid="328"><a href="#%E7%9A%84%E8%A6%86%E7%9B%96%E8%A7%84%E5%88%99" aria-hidden="true" data-reactid="329"><span class="icon icon-link" data-reactid="330"></span></a><!-- react-text: 331 -->的覆盖规则<!-- /react-text --></h4><p data-reactid="332">鉴于animateMotion有多种实现的方式，自然也就有重写规则：</p><p data-reactid="333">对于指定移动路径而言，mpath会覆盖path,’path’会覆盖values，values会覆盖frombyto；</p><p data-reactid="334">对于指定keyTimes的对应点而言，keyPoints会覆盖path，path会覆盖values,最后才是from，by和to；</p><h4 id="使用rotate时候元素相对于移动路线的方向" data-reactid="335"><a href="#%E4%BD%BF%E7%94%A8rotate%E6%97%B6%E5%80%99%E5%85%83%E7%B4%A0%E7%9B%B8%E5%AF%B9%E4%BA%8E%E7%A7%BB%E5%8A%A8%E8%B7%AF%E7%BA%BF%E7%9A%84%E6%96%B9%E5%90%91" aria-hidden="true" data-reactid="336"><span class="icon icon-link" data-reactid="337"></span></a><!-- react-text: 338 -->使用rotate时候元素相对于移动路线的方向<!-- /react-text --></h4><p data-reactid="339">当元素沿着某一条路线移动的时候，可以用rotate属性来设置元素在移动时的方向：</p><ul data-reactid="340"><li data-reactid="341">auto：元素会根据路径的方向自动旋转</li><li data-reactid="342">auto-reverse： 元素会根据路径的方向加上180度的角度自动旋转</li><li data-reactid="343">某个数字： 元素以这个数字为旋转角度沿着路径移动</li></ul><h4 id="使用keypoints控制相对移动路线的动画距离" data-reactid="344"><a href="#%E4%BD%BF%E7%94%A8keypoints%E6%8E%A7%E5%88%B6%E7%9B%B8%E5%AF%B9%E7%A7%BB%E5%8A%A8%E8%B7%AF%E7%BA%BF%E7%9A%84%E5%8A%A8%E7%94%BB%E8%B7%9D%E7%A6%BB" aria-hidden="true" data-reactid="345"><span class="icon icon-link" data-reactid="346"></span></a><!-- react-text: 347 -->使用keyPoints控制相对移动路线的动画距离<!-- /react-text --></h4><p data-reactid="348">keyPoints属性用于在移动路径中为相应的keyTimes提供具体值，如果指定了keyPoints的值，keyTimes的值将会使用keyPoints的值而非values中的值。</p><p data-reactid="349">keyPoints接受以分号间隔的介于0和1之间的小数，代表目标元素应该移动的长度，总长度是由浏览器计算得到的。如果规定了keyPoints的值，keyTimes里就应该有对应个数的值。还有就是注意这里需要把calcMode的值设为linear才行。</p><h4 id="在绝对路径上移动文字" data-reactid="350"><a href="#%E5%9C%A8%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E4%B8%8A%E7%A7%BB%E5%8A%A8%E6%96%87%E5%AD%97" aria-hidden="true" data-reactid="351"><span class="icon icon-link" data-reactid="352"></span></a><!-- react-text: 353 -->在绝对路径上移动文字<!-- /react-text --></h4><p data-reactid="354"><!-- react-text: 355 -->在绝对路径上移动文字跟移动其他SVG元素不太一样，你需要使用的是<!-- /react-text --><animate data-reactid="356"><!-- react-text: 357 -->元素而不是<!-- /react-text --><animatemotion data-reactid="358">。</animatemotion></animate></p><p data-reactid="359"><!-- react-text: 360 -->首先我们来把文字定位到某个路径上，此时可以把<!-- /react-text --><textpath data-reactid="361"><!-- react-text: 362 -->嵌套到<!-- /react-text --><text data-reactid="363"><!-- react-text: 364 -->元素里，而具体的路线将在<!-- /react-text --><textpath data-reactid="365">里指定。</textpath></text></textpath></p><pre data-reactid="366"><code data-query="{}" data-lang="data-lang" data-reactid="367">&lt;path id=&quot;myPath&quot; fill=&quot;none&quot; stroke=&quot;#000000&quot; stroke-miterlimit=&quot;10&quot; d=&quot;M91.4,104.2c3.2-3.4,18.4-0.6,23.4-0.6c5.7,0.1,10.8,0.9,16.3,2.3
+ c13.5,3.5,26.1,9.6,38.5,16.2c12.3,6.5,21.3,16.8,31.9,25.4c10.8,8.7,21,18.3,31.7,26.9c9.3,7.4,20.9,11.5,31.4,16.7
+ c13.7,6.8,26.8,9.7,41.8,9c21.4-1,40.8-3.7,61.3-10.4c10.9-3.5,18.9-11.3,28.5-17.8c5.4-3.7,10.4-6.7,14.8-11.5
+ c1.9-2.1,3.7-5.5,6.5-6.5&quot;/&gt;
+ &lt;text&gt;
+ &lt;textpath xlink:href=&quot;#myPath&quot;&gt;
+ Text laid out along a path.
+ &lt;/textpath&gt;
+ &lt;/text&gt;
+</code></pre><p data-reactid="368">此外，还可以使用startOffset来指定文字在路径中的偏移量。0%代表路径的开始，100%代表结尾，如果你设置offset是50%，文字就会从路径的中间开始。</p><h3 id="使用实现动画变化" data-reactid="369"><a href="#%E4%BD%BF%E7%94%A8%E5%AE%9E%E7%8E%B0%E5%8A%A8%E7%94%BB%E5%8F%98%E5%8C%96" aria-hidden="true" data-reactid="370"><span class="icon icon-link" data-reactid="371"></span></a><!-- react-text: 372 -->使用实现动画变化<!-- /react-text --></h3><p data-reactid="373"><animatetransform data-reactid="374"><!-- react-text: 375 -->元素会针对目标元素的变换属性实施动画，也就是说可以控制移动，缩放，旋转，倾斜。它用到的属性和<!-- /react-text --><animate data-reactid="376">元素一样，不过还有一个type属性。</animate></animatetransform></p><p data-reactid="377">这个type属性是用来指定具体的变换类型的，包括translate, scale, rotate, skewX, skewY。</p><h3 id="元素" data-reactid="378"><a href="#%E5%85%83%E7%B4%A0" aria-hidden="true" data-reactid="379"><span class="icon icon-link" data-reactid="380"></span></a><!-- react-text: 381 -->元素<!-- /react-text --></h3><p data-reactid="382">set元素提供了一种更简洁的为指定时长设置属性值的方式。不过它不能用来设置附加或累加属性。</p><h2 id="结语" data-reactid="383"><a href="#%E7%BB%93%E8%AF%AD" aria-hidden="true" data-reactid="384"><span class="icon icon-link" data-reactid="385"></span></a><!-- react-text: 386 -->结语<!-- /react-text --></h2><p data-reactid="387">不是所有的SVG属性都可以拿来实现动画，具体哪些属性可以做动画哪些不能，还是要看这里。但是SMIL还是非常有潜力的，希望以后能有更多惊艳的作品。</p></article><div data-reactid="388"></div><nav class="single-bar clearfix" data-reactid="389"><span class="prev" data-reactid="390"><a rel="prev" href="/blog/fe/electron在企业云盘中的应用" data-reactid="391"><em class="eux-icon eux-icon-page-prev" data-reactid="392"></em><!-- react-text: 393 -->Electron在企业云盘中的应用<!-- /react-text --></a></span><span class="next" data-reactid="394"><a rel="next" href="/blog/fe/fractal-vs-web" data-reactid="395"><em class="eux-icon eux-icon-page-next" data-reactid="396"></em><!-- react-text: 397 -->分形的基本画法<!-- /react-text --></a></span></nav></div></div></div><footer class="footer" data-reactid="398"><div class="eux-footer-area-wrapper container-singular" role="complementary" data-reactid="399"><div class="inner clearfix" data-reactid="400"><aside id="simple-links-2" class="widget sl-links-main" data-reactid="401"><h2 class="widgettitle" data-reactid="402">友情链接</h2><ul class="simple-links-list simple-links-2-list" id="simple-links-2-list" data-reactid="403"><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="404"><a target="_blank" href="http://sux.baidu.com/" title="百度 FEX 团队" data-reactid="405">百度 FEX</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="406"><a target="_blank" href="http://efe.baidu.com/" title="百度 EFE 团队" data-reactid="407">百度 EFE</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="408"><a target="_blank" href="http://sux.baidu.com/" title="百度 SUX 团队" data-reactid="409">百度 SUX</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="410"><a target="_blank" href="https://aotu.io/" title="京东凹凸实验室，面向多终端技术体系，致力于构建沉淀与分享包括但不限于交互、页面制作技巧、前端开发、原生APP开发等方面的专业知识及案例。" data-reactid="411">凹凸实验室</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="412"><a target="_blank" href="https://fed.renren.com/" title="人人网FED" data-reactid="413">人人网FED</a></li></ul></aside></div></div><div class="eux-icp" data-reactid="414"><!-- react-text: 415 -->百度EUX 版权所有 ©百度EUX    All rights reserved. 骄傲地采用 <!-- /react-text --><a target="_blank" href="https://github.com/picidaejs/picidaejs" data-reactid="416">Picidae</a><!-- react-text: 417 -->。<!-- /react-text --></div></footer></div>
+</div>
+<script src="/PICIDAE_COMMON.js"></script>
+<script src="/PICIDAE_ENTRY.js"></script>
+</body>
+</html>

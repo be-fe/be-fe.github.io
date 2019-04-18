@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 实现一个高度自适应的输入框 | 百度EUX </title>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?d232748d06c1fe09a6db3db0077669b7";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+
+      var _vds = _vds || [];
+      window._vds = _vds;
+      (function () {
+        _vds.push(['setAccountId', '66707fb8b27442d5b3ccca57a56800fa']);
+        _vds.push(['trackBot', false]);
+
+        (function () {
+          var vds = document.createElement('script');
+          vds.type = 'text/javascript';
+          vds.async = true;
+          vds.src = '//dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();
+    </script>
+</head>
+<body>
+<div id="root">
+    <div class="main" data-reactroot="" data-reactid="1" data-react-checksum="1728867947"><!-- react-empty: 2 --><header class="eux-header clearfix" data-reactid="3"><div class="eux-header-top" data-reactid="4"><a href="javascript:void(0);" class="eux-portable-menu" data-reactid="5"><span data-reactid="6"></span><span data-reactid="7"></span><span data-reactid="8"></span></a><!-- react-empty: 9 --><nav class="menu-primary-container" data-reactid="10"><ul id="menu-primary" class="menu" data-reactid="11"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-25" data-reactid="12"><a href="/" data-reactid="13">HOME</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-45" data-reactid="14"><a href="/" data-reactid="15">BLOG</a><ul class="sub-menu" data-reactid="16"><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="17"><a href="/ue" data-reactid="18">交互</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="19"><a href="/ui" data-reactid="20">视觉</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="21"><a href="/fe" data-reactid="22">前端</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="23"><a href="/team" data-reactid="24">团队</a></li></ul></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-46" data-reactid="25"><a href="/tools" data-reactid="26">TOOLS</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112" data-reactid="27"><a href="/works" data-reactid="28">WORKS</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-138" data-reactid="29"><a href="/jobs" data-reactid="30">JOBS</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-50" data-reactid="31"><a href="/about-us" data-reactid="32">ABOUT US</a></li></ul></nav></div></header><div class="eux-singular clearfix" data-reactid="33"><div class="container-singular clearfix" data-reactid="34"><nav class="menu-categories-container" data-reactid="35"><ul id="menu-categories" class="menu" data-reactid="36"><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="37"><span data-reactid="38"><a href="/" data-reactid="39">全部</a></span></li><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="40"><span data-reactid="41"><a href="/ue" data-reactid="42">交互</a></span></li><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="43"><span data-reactid="44"><a href="/ui" data-reactid="45">视觉</a></span></li><li class="current-menu-item menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="46"><span data-reactid="47"><a href="/fe" data-reactid="48">前端</a></span></li><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="49"><span data-reactid="50"><a href="/team" data-reactid="51">团队</a></span></li></ul></nav><div class="inner clearfix" data-reactid="52"><div class="article-meta" data-reactid="53"><h1 class="title" data-reactid="54">实现一个高度自适应的输入框</h1><div class="eux-page-detail" data-reactid="55"><span data-reactid="56"><em data-reactid="57">by.</em><!-- react-text: 58 -->李明<!-- /react-text --></span><span data-reactid="59">2017-8-3</span></div></div><article data-reactid="60"><h2 id="需求" data-reactid="61"><a href="#%E9%9C%80%E6%B1%82" aria-hidden="true" data-reactid="62"><span class="icon icon-link" data-reactid="63"></span></a><!-- react-text: 64 -->需求<!-- /react-text --></h2><ul data-reactid="65"><li data-reactid="66">实现一个输入框，高度可以随着输入文字的增加而自动增高，类似于微信输入</li><li data-reactid="67">输入为空时，显示placeholder</li><li data-reactid="68">字数限制maxlength</li></ul><h3 id="方法1：使用textarea配合工具函数autosize实现高度自适应的输入框支持ie9，具体代码如下：" data-reactid="69"><a href="#%E6%96%B9%E6%B3%951%EF%BC%9A%E4%BD%BF%E7%94%A8textarea%E9%85%8D%E5%90%88%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0autosize%E5%AE%9E%E7%8E%B0%E9%AB%98%E5%BA%A6%E8%87%AA%E9%80%82%E5%BA%94%E7%9A%84%E8%BE%93%E5%85%A5%E6%A1%86%E6%94%AF%E6%8C%81ie9%EF%BC%8C%E5%85%B7%E4%BD%93%E4%BB%A3%E7%A0%81%E5%A6%82%E4%B8%8B%EF%BC%9A" aria-hidden="true" data-reactid="70"><span class="icon icon-link" data-reactid="71"></span></a><!-- react-text: 72 -->方法1：使用textarea配合工具函数<!-- /react-text --><a href="https://github.com/jackmoore/autosize" data-reactid="73">autosize</a><!-- react-text: 74 -->实现高度自适应的输入框(支持IE9+)，具体代码如下：<!-- /react-text --></h3><pre data-reactid="75"><code class="hljs language-html" data-query="{}" data-lang="html" data-reactid="76"><span class="hljs-meta" data-reactid="77">&lt;!DOCTYPE html&gt;</span><!-- react-text: 78 -->
+    <!-- /react-text --><span class="hljs-tag" data-reactid="79"><!-- react-text: 80 -->&lt;<!-- /react-text --><span class="hljs-name" data-reactid="81">html</span><!-- react-text: 82 --> <!-- /react-text --><span class="hljs-attr" data-reactid="83">lang</span><!-- react-text: 84 -->=<!-- /react-text --><span class="hljs-string" data-reactid="85">&quot;en&quot;</span><!-- react-text: 86 -->&gt;<!-- /react-text --></span><!-- react-text: 87 -->
+    <!-- /react-text --><span class="hljs-tag" data-reactid="88"><!-- react-text: 89 -->&lt;<!-- /react-text --><span class="hljs-name" data-reactid="90">head</span><!-- react-text: 91 -->&gt;<!-- /react-text --></span><!-- react-text: 92 -->
+        <!-- /react-text --><span class="hljs-tag" data-reactid="93"><!-- react-text: 94 -->&lt;<!-- /react-text --><span class="hljs-name" data-reactid="95">meta</span><!-- react-text: 96 --> <!-- /react-text --><span class="hljs-attr" data-reactid="97">charset</span><!-- react-text: 98 -->=<!-- /react-text --><span class="hljs-string" data-reactid="99">&quot;UTF-8&quot;</span><!-- react-text: 100 -->&gt;<!-- /react-text --></span><!-- react-text: 101 -->
+        <!-- /react-text --><span class="hljs-tag" data-reactid="102"><!-- react-text: 103 -->&lt;<!-- /react-text --><span class="hljs-name" data-reactid="104">title</span><!-- react-text: 105 -->&gt;<!-- /react-text --></span><!-- react-text: 106 -->Document<!-- /react-text --><span class="hljs-tag" data-reactid="107"><!-- react-text: 108 -->&lt;/<!-- /react-text --><span class="hljs-name" data-reactid="109">title</span><!-- react-text: 110 -->&gt;<!-- /react-text --></span><!-- react-text: 111 -->
+        <!-- /react-text --><span class="hljs-tag" data-reactid="112"><!-- react-text: 113 -->&lt;<!-- /react-text --><span class="hljs-name" data-reactid="114">style</span><!-- react-text: 115 --> <!-- /react-text --><span class="hljs-attr" data-reactid="116">type</span><!-- react-text: 117 -->=<!-- /react-text --><span class="hljs-string" data-reactid="118">&quot;text/css&quot;</span><!-- react-text: 119 -->&gt;<!-- /react-text --></span><span class="css" data-reactid="120"><!-- react-text: 121 -->
+            * {
+                <!-- /react-text --><span class="hljs-attribute" data-reactid="122">margin</span><!-- react-text: 123 -->: <!-- /react-text --><span class="hljs-number" data-reactid="124">0</span><!-- react-text: 125 -->;
+                <!-- /react-text --><span class="hljs-attribute" data-reactid="126">padding</span><!-- react-text: 127 -->: <!-- /react-text --><span class="hljs-number" data-reactid="128">0</span><!-- react-text: 129 -->;
+            }
+            <!-- /react-text --><span class="hljs-selector-tag" data-reactid="130">textarea</span><!-- react-text: 131 --> {
+                <!-- /react-text --><span class="hljs-attribute" data-reactid="132">resize</span><!-- react-text: 133 -->: none;
+            }
+        <!-- /react-text --></span><span class="hljs-tag" data-reactid="134"><!-- react-text: 135 -->&lt;/<!-- /react-text --><span class="hljs-name" data-reactid="136">style</span><!-- react-text: 137 -->&gt;<!-- /react-text --></span><!-- react-text: 138 -->
+    <!-- /react-text --><span class="hljs-tag" data-reactid="139"><!-- react-text: 140 -->&lt;/<!-- /react-text --><span class="hljs-name" data-reactid="141">head</span><!-- react-text: 142 -->&gt;<!-- /react-text --></span><!-- react-text: 143 -->
+    <!-- /react-text --><span class="hljs-tag" data-reactid="144"><!-- react-text: 145 -->&lt;<!-- /react-text --><span class="hljs-name" data-reactid="146">script</span><!-- react-text: 147 --> <!-- /react-text --><span class="hljs-attr" data-reactid="148">type</span><!-- react-text: 149 -->=<!-- /react-text --><span class="hljs-string" data-reactid="150">&quot;text/javascript&quot;</span><!-- react-text: 151 --> <!-- /react-text --><span class="hljs-attr" data-reactid="152">src</span><!-- react-text: 153 -->=<!-- /react-text --><span class="hljs-string" data-reactid="154">&quot;js/autosize.min.js&quot;</span><!-- react-text: 155 -->&gt;<!-- /react-text --></span><span class="null" data-reactid="156"></span><span class="hljs-tag" data-reactid="157"><!-- react-text: 158 -->&lt;/<!-- /react-text --><span class="hljs-name" data-reactid="159">script</span><!-- react-text: 160 -->&gt;<!-- /react-text --></span><!-- react-text: 161 -->
+    <!-- /react-text --><span class="hljs-tag" data-reactid="162"><!-- react-text: 163 -->&lt;<!-- /react-text --><span class="hljs-name" data-reactid="164">body</span><!-- react-text: 165 -->&gt;<!-- /react-text --></span><!-- react-text: 166 -->
+        <!-- /react-text --><span class="hljs-tag" data-reactid="167"><!-- react-text: 168 -->&lt;<!-- /react-text --><span class="hljs-name" data-reactid="169">textarea</span><!-- react-text: 170 --> <!-- /react-text --><span class="hljs-attr" data-reactid="171">id</span><!-- react-text: 172 -->=<!-- /react-text --><span class="hljs-string" data-reactid="173">&quot;textarea&quot;</span><!-- react-text: 174 --> <!-- /react-text --><span class="hljs-attr" data-reactid="175">rows</span><!-- react-text: 176 -->=<!-- /react-text --><span class="hljs-string" data-reactid="177">&quot;1&quot;</span><!-- react-text: 178 --> <!-- /react-text --><span class="hljs-attr" data-reactid="179">placeholder</span><!-- react-text: 180 -->=<!-- /react-text --><span class="hljs-string" data-reactid="181">&quot;请输入内容...&quot;</span><!-- react-text: 182 --> <!-- /react-text --><span class="hljs-attr" data-reactid="183">maxlength</span><!-- react-text: 184 -->=<!-- /react-text --><span class="hljs-string" data-reactid="185">&quot;50&quot;</span><!-- react-text: 186 -->&gt;<!-- /react-text --></span><span class="hljs-tag" data-reactid="187"><!-- react-text: 188 -->&lt;/<!-- /react-text --><span class="hljs-name" data-reactid="189">textarea</span><!-- react-text: 190 -->&gt;<!-- /react-text --></span><!-- react-text: 191 -->
+    <!-- /react-text --><span class="hljs-tag" data-reactid="192"><!-- react-text: 193 -->&lt;/<!-- /react-text --><span class="hljs-name" data-reactid="194">body</span><!-- react-text: 195 -->&gt;<!-- /react-text --></span><!-- react-text: 196 -->
+    <!-- /react-text --><span class="hljs-tag" data-reactid="197"><!-- react-text: 198 -->&lt;<!-- /react-text --><span class="hljs-name" data-reactid="199">script</span><!-- react-text: 200 --> <!-- /react-text --><span class="hljs-attr" data-reactid="201">type</span><!-- react-text: 202 -->=<!-- /react-text --><span class="hljs-string" data-reactid="203">&quot;text/javascript&quot;</span><!-- react-text: 204 -->&gt;<!-- /react-text --></span><span class="javascript" data-reactid="205"><!-- react-text: 206 -->
+        autosize(<!-- /react-text --><span class="hljs-built_in" data-reactid="207">document</span><!-- react-text: 208 -->.querySelector(<!-- /react-text --><span class="hljs-string" data-reactid="209">&#x27;#textarea&#x27;</span><!-- react-text: 210 -->));
+    <!-- /react-text --></span><span class="hljs-tag" data-reactid="211"><!-- react-text: 212 -->&lt;/<!-- /react-text --><span class="hljs-name" data-reactid="213">script</span><!-- react-text: 214 -->&gt;<!-- /react-text --></span><!-- react-text: 215 -->
+    <!-- /react-text --><span class="hljs-tag" data-reactid="216"><!-- react-text: 217 -->&lt;/<!-- /react-text --><span class="hljs-name" data-reactid="218">html</span><!-- react-text: 219 -->&gt;<!-- /react-text --></span></code></pre><p data-reactid="220">注：因为textarea的默认高度为rows=2,所以需要将textarea的rows设置为1</p><h3 id="方法2：div加属性contenteditabletrue" data-reactid="221"><a href="#%E6%96%B9%E6%B3%952%EF%BC%9Adiv%E5%8A%A0%E5%B1%9E%E6%80%A7contenteditabletrue" aria-hidden="true" data-reactid="222"><span class="icon icon-link" data-reactid="223"></span></a><!-- react-text: 224 -->方法2：div加属性contenteditable=true<!-- /react-text --></h3><h4 id="我们知道可以将div的contenteditable设置伪true，将其变为可输入状态。代码如下：" data-reactid="225"><a href="#%E6%88%91%E4%BB%AC%E7%9F%A5%E9%81%93%E5%8F%AF%E4%BB%A5%E5%B0%86div%E7%9A%84contenteditable%E8%AE%BE%E7%BD%AE%E4%BC%AAtrue%EF%BC%8C%E5%B0%86%E5%85%B6%E5%8F%98%E4%B8%BA%E5%8F%AF%E8%BE%93%E5%85%A5%E7%8A%B6%E6%80%81%E3%80%82%E4%BB%A3%E7%A0%81%E5%A6%82%E4%B8%8B%EF%BC%9A" aria-hidden="true" data-reactid="226"><span class="icon icon-link" data-reactid="227"></span></a><!-- react-text: 228 -->我们知道可以将div的contenteditable设置伪true，将其变为可输入状态。代码如下：<!-- /react-text --></h4><pre data-reactid="229"><code class="hljs language-html" data-query="{}" data-lang="html" data-reactid="230"><span class="hljs-tag" data-reactid="231"><!-- react-text: 232 -->&lt;<!-- /react-text --><span class="hljs-name" data-reactid="233">div</span><!-- react-text: 234 --> <!-- /react-text --><span class="hljs-attr" data-reactid="235">contenteditable</span><!-- react-text: 236 -->=<!-- /react-text --><span class="hljs-string" data-reactid="237">&quot;true&quot;</span><!-- react-text: 238 -->&gt;<!-- /react-text --></span><span class="hljs-tag" data-reactid="239"><!-- react-text: 240 -->&lt;/<!-- /react-text --><span class="hljs-name" data-reactid="241">div</span><!-- react-text: 242 -->&gt;<!-- /react-text --></span></code></pre><p data-reactid="243">这样就满足了我们的第一个需求——高度自适应。但是在手机上测试会发现第一个问题，iOS上面无法输入。经过查找资料，发现只需要为其添加如下样式即可:</p><pre data-reactid="244"><code class="hljs language-css" data-query="{}" data-lang="css" data-reactid="245"><!-- react-text: 246 --> <!-- /react-text --><span class="hljs-selector-tag" data-reactid="247">div</span><!-- react-text: 248 -->{
+    <!-- /react-text --><span class="hljs-attribute" data-reactid="249">user-select</span><!-- react-text: 250 -->:text;
+    <!-- /react-text --><span class="hljs-attribute" data-reactid="251">-webkit-user-select</span><!-- react-text: 252 -->:text;
+}<!-- /react-text --></code></pre><h4 id="实现placeholder" data-reactid="253"><a href="#%E5%AE%9E%E7%8E%B0placeholder" aria-hidden="true" data-reactid="254"><span class="icon icon-link" data-reactid="255"></span></a><!-- react-text: 256 -->实现placeholder<!-- /react-text --></h4><h4 id="使用cssjs实现-placeholder，思路：根据输入通过动态添加class，模拟placeholder的行为，代码如下" data-reactid="257"><a href="#%E4%BD%BF%E7%94%A8cssjs%E5%AE%9E%E7%8E%B0-placeholder%EF%BC%8C%E6%80%9D%E8%B7%AF%EF%BC%9A%E6%A0%B9%E6%8D%AE%E8%BE%93%E5%85%A5%E9%80%9A%E8%BF%87%E5%8A%A8%E6%80%81%E6%B7%BB%E5%8A%A0class%EF%BC%8C%E6%A8%A1%E6%8B%9Fplaceholder%E7%9A%84%E8%A1%8C%E4%B8%BA%EF%BC%8C%E4%BB%A3%E7%A0%81%E5%A6%82%E4%B8%8B" aria-hidden="true" data-reactid="258"><span class="icon icon-link" data-reactid="259"></span></a><!-- react-text: 260 -->使用css+js实现 placeholder，思路：根据输入通过动态添加class，模拟placeHolder的行为，代码如下:<!-- /react-text --></h4><pre data-reactid="261"><code data-query="{}" data-lang="data-lang" data-reactid="262">// css
+.textarea {
+    width: 400px;
+    min-height: 20px;
+    max-height: 300px;
+    _height: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 3px;
+    outline: 0;
+    border: 1px solid #a0b3d6;
+    font-size: 12px;
+    line-height: 24px;
+    padding: 2px;
+    word-wrap: break-word;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-color: rgba(82, 168, 236, 0.8);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+    position: relative;
+    user-select: text;
+    -webkit-user-select: text;
+}
+.placeholder:before {
+    content: &#x27;请输入内容...&#x27;;
+    line-height: 30px;
+    position: absolute;
+    left: 5px;
+    top: 0;
+    z-index: 1;
+}
+// html
+&lt;div class=&quot;textarea placeholder&quot; contenteditable=&quot;true&quot; data-placeholder=&quot;请输入内容...&quot; data-length=&quot;10&quot;&gt;&lt;br /&gt;&lt;/div&gt;
+// js
+var oInputBox = document.querySelector(&#x27;.textarea&#x27;);
+oInputBox.oninput = oInputBox.onpropertychange = function (ev) {
+    var innterStr = oInputBox.innerText;
+    var _this = this;
+
+    // placeholder
+    if (innterStr.length == 0) {
+        _this.classList.add(&#x27;placeholder&#x27;);
+    } else {
+        _this.classList.remove(&#x27;placeholder&#x27;);
+    }
+};
+</code></pre><p data-reactid="263">到此，我们已经实现了第二个需求——可以设置placeholder</p><h4 id="实现maxlength" data-reactid="264"><a href="#%E5%AE%9E%E7%8E%B0maxlength" aria-hidden="true" data-reactid="265"><span class="icon icon-link" data-reactid="266"></span></a><!-- react-text: 267 -->实现maxlength<!-- /react-text --></h4><p data-reactid="268">同样的，我们也不能通过直接设置maxlength来满足需求。所以通过监听input事件来实时计算长度。</p><pre data-reactid="269"><code data-query="{}" data-lang="data-lang" data-reactid="270">var oInputBox = document.querySelector(&#x27;.textarea&#x27;);
+oInputBox.oninput = oInputBox.onpropertychange = function (ev) {
+    var innterStr = oInputBox.innerText;
+    var _this = this;
+
+    // maxlength
+    var len = parseInt(_this.getAttribute(&#x27;data-length&#x27;));
+    if (innterStr.length &gt; len) {
+        oInputBox.innerText = innterStr.substring(0,len);
+    }
+};
+</code></pre><p data-reactid="271">以上代码看上去没有问题，但是会发现光标会跑到最前方，这样就会造成不好的用户体验，甚至出现Bug。所以在截取了最大长度的用户输入后，我们还需要将光标放到最后。完整JS代码如下：</p><pre data-reactid="272"><code data-query="{}" data-lang="data-lang" data-reactid="273">var oInputBox = document.querySelector(&#x27;.textarea&#x27;);
+oInputBox.oninput = oInputBox.onpropertychange = function (ev) {
+    var innterStr = oInputBox.innerText;
+    var _this = this;
+
+    // placeholder
+    if (innterStr.length == 0) {
+        _this.classList.add(&#x27;placeholder&#x27;);
+    } else {
+        _this.classList.remove(&#x27;placeholder&#x27;);
+    }
+    // maxlength
+    var len = parseInt(_this.getAttribute(&#x27;data-length&#x27;));
+    if (innterStr.length &gt; len) {
+        oInputBox.innerText = innterStr.substring(0,len);
+    }
+
+    // div innerText重新赋值之后的光标问题
+
+    if(navigator.userAgent.indexOf(&#x27;MSIE&#x27;) &gt; -1) {
+        var range = document.selection.createRange();
+        _this.last = range;
+        range.moveToElementText(_this);
+        range.select();
+        document.selection.empty(); //取消选中
+    } else {
+        var range = document.createRange();
+        range.selectNodeContents(_this);
+        range.collapse(false);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+    }
+};
+</code></pre><p data-reactid="274">到此为止，一个可以自动增加高度，并且支持placeholder和maxlength的输入框就完成了。</p><h3 id="要点总结：" data-reactid="275"><a href="#%E8%A6%81%E7%82%B9%E6%80%BB%E7%BB%93%EF%BC%9A" aria-hidden="true" data-reactid="276"><span class="icon icon-link" data-reactid="277"></span></a><!-- react-text: 278 -->要点总结：<!-- /react-text --></h3><ul data-reactid="279"><li data-reactid="280">方法1：autosizejs方法通过监听textarea的input、keyup事件动态的获取其scrollHeight，计算出实际高度并配合overflow属性的改变来动态的改变 textarea的高度，此方法使用的时候需要注意的是textarea的rows属性要设置为1，两行以内的高度自适应就会出现问题；兼容性：IE9+</li><li data-reactid="281">方法2：div设置contentEditable为true后，输入或删除内容时，其高度本身就会随着内容的变化而变化，我们需要解决的问题只是在输入过程中光标的位置问题；兼容性：IE11及其他高级浏览器</li></ul><h3 id="参考资料：" data-reactid="282"><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%EF%BC%9A" aria-hidden="true" data-reactid="283"><span class="icon icon-link" data-reactid="284"></span></a><!-- react-text: 285 -->参考资料：<!-- /react-text --></h3><p data-reactid="286"><a href="https://github.com/jackmoore/autosize" data-reactid="287">autosize</a></p><p data-reactid="288"><a href="https://juejin.im/post/591132902f301e006c304e8e" data-reactid="289">高度自适应输入框</a></p></article><div data-reactid="290"></div><nav class="single-bar clearfix" data-reactid="291"><span class="prev" data-reactid="292"><a rel="prev" href="/blog/fe/Chrome调试工具的一些高阶功能" data-reactid="293"><em class="eux-icon eux-icon-page-prev" data-reactid="294"></em><!-- react-text: 295 -->Chrome 调试工具的一些高阶功能<!-- /react-text --></a></span><span class="next" data-reactid="296"><a rel="next" href="/blog/fe/web开发中常见的乱码" data-reactid="297"><em class="eux-icon eux-icon-page-next" data-reactid="298"></em><!-- react-text: 299 -->Web开发中常见的“乱码”<!-- /react-text --></a></span></nav></div></div></div><footer class="footer" data-reactid="300"><div class="eux-footer-area-wrapper container-singular" role="complementary" data-reactid="301"><div class="inner clearfix" data-reactid="302"><aside id="simple-links-2" class="widget sl-links-main" data-reactid="303"><h2 class="widgettitle" data-reactid="304">友情链接</h2><ul class="simple-links-list simple-links-2-list" id="simple-links-2-list" data-reactid="305"><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="306"><a target="_blank" href="http://sux.baidu.com/" title="百度 FEX 团队" data-reactid="307">百度 FEX</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="308"><a target="_blank" href="http://efe.baidu.com/" title="百度 EFE 团队" data-reactid="309">百度 EFE</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="310"><a target="_blank" href="http://sux.baidu.com/" title="百度 SUX 团队" data-reactid="311">百度 SUX</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="312"><a target="_blank" href="https://aotu.io/" title="京东凹凸实验室，面向多终端技术体系，致力于构建沉淀与分享包括但不限于交互、页面制作技巧、前端开发、原生APP开发等方面的专业知识及案例。" data-reactid="313">凹凸实验室</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="314"><a target="_blank" href="https://fed.renren.com/" title="人人网FED" data-reactid="315">人人网FED</a></li></ul></aside></div></div><div class="eux-icp" data-reactid="316"><!-- react-text: 317 -->百度EUX 版权所有 ©百度EUX    All rights reserved. 骄傲地采用 <!-- /react-text --><a target="_blank" href="https://github.com/picidaejs/picidaejs" data-reactid="318">Picidae</a><!-- react-text: 319 -->。<!-- /react-text --></div></footer></div>
+</div>
+<script src="/PICIDAE_COMMON.js"></script>
+<script src="/PICIDAE_ENTRY.js"></script>
+</body>
+</html>

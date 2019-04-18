@@ -1,0 +1,2 @@
+webpackJsonp([6,56],{848:function(e,t){e.exports={content:"<img src=http://ww2.sinaimg.cn/large/633b942ejw1eyel1hmuanj20m87jau0x.jpg alt width=800 height=9766>",extra:{"_image-loader_":[]}}}});
+//# sourceMappingURL=be-able-to-stay-three-seconds-of-intro.js.map

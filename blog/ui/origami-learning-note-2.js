@@ -1,0 +1,2 @@
+webpackJsonp([0,56],{854:function(t,e){t.exports={content:"<img src=http://ww4.sinaimg.cn/large/56f7b09egw1ew4ct2dfvrj20m81an14i.jpg alt width=800 height=1679> <img src=http://ww1.sinaimg.cn/large/56f7b09egw1ew4ctkmdb4j20m81s6wvx.jpg alt width=800 height=2310> <img src=http://ww2.sinaimg.cn/large/56f7b09egw1ew4ctze1rtj20m81enqep.jpg alt width=800 height=1823> <img src=http://ww4.sinaimg.cn/large/56f7b09egw1ew4cu9b4apj20m81ixk20.jpg alt width=800 height=1977>",extra:{"_image-loader_":[]}}}});
+//# sourceMappingURL=origami-learning-note-2.js.map

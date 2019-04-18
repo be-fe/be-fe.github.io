@@ -1,0 +1,2 @@
+webpackJsonp([1,56],{853:function(e,t){e.exports={content:"<img src=http://ww2.sinaimg.cn/large/56f7b09ejw1ew49vaam2mj20ms2elk68.jpg alt width=820 height=3117>",extra:{"_image-loader_":[]}}}});
+//# sourceMappingURL=origami-learning-1.js.map

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 脚本的动态加载 | 百度EUX </title>
+    <link rel="stylesheet" href="/style.css">
+    <script>
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?d232748d06c1fe09a6db3db0077669b7";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+
+      var _vds = _vds || [];
+      window._vds = _vds;
+      (function () {
+        _vds.push(['setAccountId', '66707fb8b27442d5b3ccca57a56800fa']);
+        _vds.push(['trackBot', false]);
+
+        (function () {
+          var vds = document.createElement('script');
+          vds.type = 'text/javascript';
+          vds.async = true;
+          vds.src = '//dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();
+    </script>
+</head>
+<body>
+<div id="root">
+    <div class="main" data-reactroot="" data-reactid="1" data-react-checksum="1663784355"><!-- react-empty: 2 --><header class="eux-header clearfix" data-reactid="3"><div class="eux-header-top" data-reactid="4"><a href="javascript:void(0);" class="eux-portable-menu" data-reactid="5"><span data-reactid="6"></span><span data-reactid="7"></span><span data-reactid="8"></span></a><!-- react-empty: 9 --><nav class="menu-primary-container" data-reactid="10"><ul id="menu-primary" class="menu" data-reactid="11"><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-25" data-reactid="12"><a href="/" data-reactid="13">HOME</a></li><li class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-45" data-reactid="14"><a href="/" data-reactid="15">BLOG</a><ul class="sub-menu" data-reactid="16"><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="17"><a href="/ue" data-reactid="18">交互</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="19"><a href="/ui" data-reactid="20">视觉</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="21"><a href="/fe" data-reactid="22">前端</a></li><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-63" data-reactid="23"><a href="/team" data-reactid="24">团队</a></li></ul></li><li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-46" data-reactid="25"><a href="/tools" data-reactid="26">TOOLS</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-112" data-reactid="27"><a href="/works" data-reactid="28">WORKS</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-138" data-reactid="29"><a href="/jobs" data-reactid="30">JOBS</a></li><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-50" data-reactid="31"><a href="/about-us" data-reactid="32">ABOUT US</a></li></ul></nav></div></header><div class="eux-singular clearfix" data-reactid="33"><div class="container-singular clearfix" data-reactid="34"><nav class="menu-categories-container" data-reactid="35"><ul id="menu-categories" class="menu" data-reactid="36"><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="37"><span data-reactid="38"><a href="/" data-reactid="39">全部</a></span></li><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="40"><span data-reactid="41"><a href="/ue" data-reactid="42">交互</a></span></li><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="43"><span data-reactid="44"><a href="/ui" data-reactid="45">视觉</a></span></li><li class="current-menu-item menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="46"><span data-reactid="47"><a href="/fe" data-reactid="48">前端</a></span></li><li class="menu-item menu-item-type-custom menu-item-object-custom current_page_item menu-item-55" data-reactid="49"><span data-reactid="50"><a href="/team" data-reactid="51">团队</a></span></li></ul></nav><div class="inner clearfix" data-reactid="52"><div class="article-meta" data-reactid="53"><h1 class="title" data-reactid="54">脚本的动态加载</h1><div class="eux-page-detail" data-reactid="55"><span data-reactid="56"><em data-reactid="57">by.</em><!-- react-text: 58 -->sucer<!-- /react-text --></span><span data-reactid="59">2015-11-13</span></div></div><article data-reactid="60"><h3 id="脚本的动态加载" data-reactid="61"><a href="#%E8%84%9A%E6%9C%AC%E7%9A%84%E5%8A%A8%E6%80%81%E5%8A%A0%E8%BD%BD" aria-hidden="true" data-reactid="62"><span class="icon icon-link" data-reactid="63"></span></a><!-- react-text: 64 -->脚本的动态加载<!-- /react-text --></h3><blockquote data-reactid="65"><blockquote data-reactid="66"><p data-reactid="67">我们平时如何挂载脚本?</p></blockquote></blockquote><p data-reactid="68">众所周知，在web应用中，我们时常需要使用js脚本对应用做这样或者那样的操作。而仙贝们为了解放大家的双手，降低大家的开发成本，创造了很多具有各种用途，或者针对对应问题的解决方案。这些解决方案，被称作框架和库。</p><p data-reactid="69">而作为这些脚本的使用者，我们只需要简单而又传统的将脚本使用script标签插入我们的应用中就行了。</p><pre data-reactid="70"><code data-query="{}" data-lang="data-lang" data-reactid="71">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;script src=&quot;myscript.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p data-reactid="72">如上文所说，这是简单而又传统的使用方法。事实上在技术快速迭代的今天，传统方式有时候并不能满足我们的需求。当一个webapp含有过多的功能的时候，我们的脚本可能越来越大。而用户的体验则是：这网站打开真慢啊～～～</p><p data-reactid="73">然而事实上我们功能做得相当的多，效果做得相当的好，大部分用户其实只是使用了其中的某几个基础功能而已。但只是为了所有功能能够使用而增加了加载量，似乎有些得不偿失。</p><blockquote data-reactid="74"><blockquote data-reactid="75"><p data-reactid="76">然后，我们有了动态加载脚本的想法</p></blockquote></blockquote><p data-reactid="77"><!-- react-text: 78 -->从<!-- /react-text --><em data-reactid="79">Netscape Navigator 4.0</em><!-- react-text: 80 -->为起点，浏览器厂商们都开始支持起了不同形态的动态html。通过dom api，程序猿们可以轻松的对节点进行各种操作。于是对我们来说，又有了新的方法去加载脚本。<!-- /react-text --></p><pre data-reactid="81"><code data-query="{}" data-lang="data-lang" data-reactid="82">var script = document.createElement(&#x27;script&#x27;);
+script.async = true;
+script.src = &#x27;myScript.js&#x27;;
+document.getElementsByTagName(&#x27;head&#x27;)[0].appendChild(script);
+</code></pre><p data-reactid="83">当然了，这样的写法是最基础的增加方法。在这样的写法下，我们无法得知脚本到底有没有加载完，如果依赖脚本没有加载并解释完毕，那么我们加载它就没有任何意义，还会因此阻断所有相关操作。</p><p data-reactid="84">谢天谢地，天无绝人之路，浏览器老板们还是给我们提供了方法对脚本加载情况进行探知。我们所知的onreadystatechange事件和onload事件可以帮我们判断脚本是否加载完毕～</p><pre data-reactid="85"><code data-query="{}" data-lang="data-lang" data-reactid="86">script.onreadystatechange = script.onload = function (evt) {
+    var evt = evt ? evt : window.event;
+    if (!evt.readyState || evt.readyState === &#x27;loaded&#x27; || evt.readyState === &#x27;complete&#x27;) {
+        cb &amp;&amp; cb();
+        script.onreadystatechange = script.onload ＝ null;
+        script.parent.removeChild(script);
+        script = null;
+    }
+}
+</code></pre><blockquote data-reactid="87"><blockquote data-reactid="88"><p data-reactid="89">作为一个正常人，我们想不想加载更多东西呢？</p></blockquote></blockquote><p data-reactid="90">想！当然想。作为一个正常人，我们极其希望也load别的东西过来，那现在我们还有什么东西可以通过动态加载呢？css／picture／function都可以成为我们的加载对象。这时候，我们就该有一个简单的加载器了，聚合我们想要的功能，让我们解放双手！</p><pre data-reactid="91"><code data-query="{}" data-lang="data-lang" data-reactid="92">var handler = {
+    js: jsHandler,
+    css: cssHandler,
+    fn: fnHandler
+};
+
+var Loader = function (src, type) {
+
+    if (src === undefined) {
+        throw new Error(&#x27;木有参数&#x27;);
+    }
+
+    //  修正参数
+    if (!type) {
+        if (typeof src === &#x27;string&#x27;) {
+            if (/\.css$|\.css\?/i.test(src)) {
+                type = &#x27;css&#x27;;
+            }
+            if (/\.js$|\.js\?/i.test(src)) {
+                type = &#x27;js&#x27;;
+            }
+        }
+        if (typeof src === &#x27;function&#x27;) {
+            type = &#x27;fn&#x27;
+        }
+    }
+
+    type = type || &#x27;js&#x27;;
+
+    handler[type](src);
+};
+
+function jsHandler(src) {}
+
+function cssHandler(href) {}
+
+function fnHandler(fn) {}
+</code></pre><blockquote data-reactid="93"><blockquote data-reactid="94"><p data-reactid="95">如何填充我们的函数</p></blockquote></blockquote><img src="http://ww3.sinaimg.cn/large/43b712ebgw1ey33fsbjl3j20hd0lhtfg.jpg" alt="alt" width="625" height="773" data-reactid="96"/><p data-reactid="97">我们有了处理不同类型加载项的逻辑，但首先，我们还是要完善jsHandler函数</p><blockquote data-reactid="98"><blockquote data-reactid="99"><p data-reactid="100">获取head元素</p></blockquote></blockquote><pre data-reactid="101"><code data-query="{}" data-lang="data-lang" data-reactid="102">var doc = document;
+var head = doc.head || doc.getElementsByTagName(&quot;head&quot;)[0] || doc.documentElement;
+</code></pre><p data-reactid="103">将document和head缓存起来，以便多次使用，这可以提高一点点的性能…</p><blockquote data-reactid="104"><blockquote data-reactid="105"><p data-reactid="106">为jsHandler完善加载部分</p></blockquote></blockquote><pre data-reactid="107"><code data-query="{}" data-lang="data-lang" data-reactid="108">function jsHandler(src, callback) {
+    var script = doc.createElement(&#x27;script&#x27;);
+    script.async = true;
+    script.src = src;
+
+    // 对支持onload事件的浏览器做处理
+    var hasOnload = &#x27;onload&#x27; in script;
+    if (hasOnload) {
+        script.onload = jsOnload;
+        script.onerror = function () {
+            jsOnload(true);
+        }
+    }
+
+    // 对支持onreadystatechange的浏览器做处理
+    else {
+        script.onreadystatechange = function() {
+            if (/loaded|complete/.test(script.readyState)) {
+                jsOnload();
+            }
+        }
+    }
+
+    head.appendChild(script);
+
+    // 当事件
+    function jsOnload(error) {
+        isTimeout = false;
+        script.onload = script.onerror = script.onreadystatechange = null;
+        head.removeChild(script);
+        script = null;
+        callback(error);
+    }
+}
+</code></pre><pre data-reactid="109"><code data-query="{}" data-lang="data-lang" data-reactid="110">在上面这段代码中，我们为加载js做了一系列处理，由于浏览器厂商的实现问题，我们要对脚本是否加载成功或失败作出判断，这是个很麻烦的事情，尤其是对需要向下兼容的同学来说。
+</code></pre><p data-reactid="111"><!-- react-text: 112 -->从<!-- /react-text --><a href="http://qianduanblog.com/post/headjs.html" data-reactid="113">headjs</a><!-- react-text: 114 -->这篇文章的注释来看，脚本是否加载完毕依赖于onload事件，而ie9及以下依赖于对状态标志进行load或者complete字符的检测。<!-- /react-text --></p><pre data-reactid="115"><code data-query="{}" data-lang="data-lang" data-reactid="116">// IE 7/8 (2 events on 1st load)
+// 1) event.type = readystatechange, s.readyState = loading
+// 2) event.type = readystatechange, s.readyState = loaded
+
+// IE 7/8 (1 event on reload)
+// 1) event.type = readystatechange, s.readyState = complete 
+
+// event.type === &#x27;readystatechange&#x27; &amp;&amp; /loaded¦complete/.test(s.readyState)
+
+// IE 9 (3 events on 1st load)
+// 1) event.type = readystatechange, s.readyState = loading
+// 2) event.type = readystatechange, s.readyState = loaded
+// 3) event.type = load            , s.readyState = loaded
+
+// IE 9 (2 events on reload)
+// 1) event.type = readystatechange, s.readyState = complete 
+// 2) event.type = load            , s.readyState = complete 
+
+// event.type === &#x27;load&#x27;             &amp;&amp; /loaded¦complete/.test(s.readyState)
+// event.type === &#x27;readystatechange&#x27; &amp;&amp; /loaded¦complete/.test(s.readyState)
+
+// IE 10 (3 events on 1st load)
+// 1) event.type = readystatechange, s.readyState = loading
+// 2) event.type = load            , s.readyState = complete
+// 3) event.type = readystatechange, s.readyState = loaded
+
+// IE 10 (3 events on reload)
+// 1) event.type = readystatechange, s.readyState = loaded
+// 2) event.type = load            , s.readyState = complete
+// 3) event.type = readystatechange, s.readyState = complete 
+
+// event.type === &#x27;load&#x27;             &amp;&amp; /loaded¦complete/.test(s.readyState)
+// event.type === &#x27;readystatechange&#x27; &amp;&amp; /complete/.test(s.readyState)
+
+// Other Browsers (1 event on 1st load)
+// 1) event.type = load, s.readyState = undefined
+
+// Other Browsers (1 event on reload)
+// 1) event.type = load, s.readyState = undefined            
+
+// event.type == &#x27;load&#x27; &amp;&amp; s.readyState = undefined
+</code></pre><p data-reactid="117">当然，如果遇到了既不支持onload又不支持onreadystatechange的浏览器的时候，我们只能另寻他法了。</p><p data-reactid="118">如果要加载的脚本是你写的，那你自己可以处理～如果加载的脚本不是你写的～哦喽，不在本文讨论范围之内～</p><blockquote data-reactid="119"><blockquote data-reactid="120"><p data-reactid="121">当你需要jsHandler检测加载是否超时的时候</p></blockquote></blockquote><p data-reactid="122">我们为jsHandler增加一个参数timeout，并在函数中实现如下逻辑</p><pre data-reactid="123"><code data-query="{}" data-lang="data-lang" data-reactid="124">function jsHandler(src, callback, timeout) {
+    ...
+    // 检测是否超时的标志
+    var isTimeout = true;
+    ...
+
+    if (timeout) {
+        setTimeout(timeoutHandler, timeout);
+    }
+
+    head.appendChild(script);
+
+    function jsOnload(error) {
+        // 当在时间内完成操作时，不管是否成功，将超时标志设为false
+        isTimeout = false;
+        script.onload = script.onerror = script.onreadystatechange = null;
+        head.removeChild(script);
+        script = null;
+        callback(error);
+    }
+
+    function timeoutHandler() {
+        // 如果标志未改变，认为其超时
+        if (isTimeout) {
+            jsOnload(true);
+        }
+    }
+}
+</code></pre><blockquote data-reactid="125"><blockquote data-reactid="126"><p data-reactid="127">当我们同步执行代码的时候</p></blockquote></blockquote><p data-reactid="128">当我们需要加载一个或者多个脚本的时候，我们会发现，“奥我次奥，怎么请求了那么多次呢？这不科学。”</p><p data-reactid="129">这是因为我们的loader在多处被调用或同步调用了，于是我们想啊，搞个map纪录缓存算了。于是乎：</p><p data-reactid="130">－ 我们需要一些变量</p><pre data-reactid="131"><code data-query="{}" data-lang="data-lang" data-reactid="132">// 用作存储脚本信息
+var cache = {};
+// 用作生成不重复的客户端id
+var _cid = 0;
+// 用作存储其他loader实例需要运行的脚本任务
+var processCache = {};
+
+// 加载状态标识
+var DONE = &#x27;done&#x27;;
+var REJECTED = &#x27;rejected&#x27;;
+var PENDING = &#x27;pending&#x27;;
+</code></pre><ul data-reactid="133"><li data-reactid="134">我们需要产生不同的存储id</li></ul><pre data-reactid="135"><code data-query="{}" data-lang="data-lang" data-reactid="136">/**
+ * 产生客户端id
+ * @return {Number} [description]
+ */
+function cid() {
+    return _cid++;
+}
+</code></pre><ul data-reactid="137"><li data-reactid="138">我们需要创建一个Script类，new一个实例用于存储任务的基本信息</li></ul><pre data-reactid="139"><code data-query="{}" data-lang="data-lang" data-reactid="140">/**
+ * Script对象，储存需要加载的任务的基本信息
+ * @param  {String} uri     uri 地址 | 需要执行的函数
+ * @param  {String} type    任务类型
+ */
+function Script(uri, type) {
+    this.uri = uri;
+    this.type = type;
+    this.cid = cid();
+    this.status = PENDING;
+}
+</code></pre><p data-reactid="141">－ 当我们寻找缓存中的任务对象的时候，因该返回正确的对象。怎么寻找缓存呢，当然是通过地址来索引啦</p><pre data-reactid="142"><code data-query="{}" data-lang="data-lang" data-reactid="143">/**
+ * 从缓存中获取需要的Script对象
+ * 如果没有，新建一个
+ * @param  {String} uri     uri 地址 | 需要执行的函数
+ * @param  {String} type    任务类型
+ * @return {Object}         需要的Script对象
+ */
+function get(uri, type) {
+    // 如果不存在于缓存中，创建一个新的Script对象
+    return cache[uri] || (cache[uri] = new Script(uri, type));
+}
+</code></pre><blockquote data-reactid="144"><blockquote data-reactid="145"><p data-reactid="146">如果我们的脚本或函数有别名怎么办！</p></blockquote></blockquote><pre data-reactid="147"><code data-query="{}" data-lang="data-lang" data-reactid="148">var alias = {};
+/**
+ * 获取有别名的Script对象
+ * @param  {String} uri     uri 地址 | 需要执行的函数
+ * @param  {String} type    任务类型
+ * @return {Object}      Script Object
+ */
+function getCache(uri, type) {
+    var src = getAlias(uri);
+    return  src ? get(src) : get(uri, type);
+}
+
+/**
+ * 获取真实地址
+ * @param  {String} name [description]
+ * @return {[type]}      return uri
+ */
+function getAlias(name) {
+    return alias[name];
+}
+</code></pre><p data-reactid="149">别名的用途在于我们不用多次输入同样长度的uri,或者说是函数。</p><blockquote data-reactid="150"><blockquote data-reactid="151"><p data-reactid="152">现在，该填充我们的Loader类了。</p></blockquote></blockquote><p data-reactid="153">我们要很清楚的知道，Loader需要做什么。</p><p data-reactid="154">一个简单的Loader应该可以多次添加需要加载的内容，then或者add方法可以让用户添加任务。那它应该有一个内置的list，可以存储这些待添加的任务。</p><p data-reactid="155">它也应该可以在全部脚本加载完的时候执行我们的callback，那么我们应该实现一个方法接受一个回调，在任务执行完时调用。</p><p data-reactid="156">我们也要可以对某些地址进行别名命名，也需要设置超时时间</p><ul data-reactid="157"><li data-reactid="158">实现Loader类</li></ul><pre data-reactid="159"><code data-query="{}" data-lang="data-lang" data-reactid="160">/**
+ * Loader类
+ */
+var Loader = function () {
+    this.list = [];
+    this.timeout = 0;
+    this.callback = null;
+};
+</code></pre><ul data-reactid="161"><li data-reactid="162">实现then方法，使用then的时候应该可以连续使用</li></ul><pre data-reactid="163"><code data-query="{}" data-lang="data-lang" data-reactid="164">/**
+ * 实现的then方法
+ * @param  {String} src  地址
+ * @param  {String} type 类型
+ * @return {Object}      Loader对象
+ */
+Loader.prototype.then = function(src, type) {
+    if (src === undefined) {
+        throw new Error(&#x27;木有参数&#x27;);
+    }
+
+    //  修正参数
+    if (!type) {
+        if (typeof src === &#x27;string&#x27;) {
+            if (/\.css$|\.css\?/i.test(src)) {
+                type = &#x27;css&#x27;;
+            }
+            if (/\.js$|\.js\?/i.test(src)) {
+                type = &#x27;js&#x27;;
+            }
+        }
+        if (typeof src === &#x27;function&#x27;) {
+            type = &#x27;fn&#x27;
+        }
+    }
+
+    type = type || &#x27;js&#x27;;
+    this.list.push(getCache(src, type));
+    return this;
+};
+</code></pre><ul data-reactid="165"><li data-reactid="166">实现done方法</li></ul><pre data-reactid="167"><code data-query="{}" data-lang="data-lang" data-reactid="168">/**
+ * done方法，接受一个callback，在所有任务完成时调用
+ * @param  {Function} cb 完成后的回调
+ * @return {Object}      第一次调用done后返回一个新的对象
+ */
+Loader.prototype.done = function(cb) {
+    if (this.callback === null) {
+        this.callback = cb;
+    }
+    if (!this.list.length) {
+        this.callback &amp;&amp; this.callback();
+        return;
+    }
+    var script = this.list.shift();
+    handler[script.type](this, script);
+    if (!this.called) {
+        this.called = true;
+        return new Loader();
+    }
+};
+</code></pre><ul data-reactid="169"><li data-reactid="170">实现config配置</li></ul><pre data-reactid="171"><code data-query="{}" data-lang="data-lang" data-reactid="172">Loader.prototype.config = function (opts) {
+    this.timeout = opts.timeout || 0;
+    if (opts.alias &amp;&amp; !opts.alias.length) {
+        for (var i = opts.alias.length - 1; i &gt;= 0; i--) {
+            alias[i] = opts.alias[i];
+        }
+    }
+}
+</code></pre><blockquote data-reactid="173"><blockquote data-reactid="174"><p data-reactid="175">如何让错误集中显示</p></blockquote></blockquote><p data-reactid="176">我们需要接入一个resolve方法，Loader类也应该有一个errors的列表来储存每次错误的信息，最后放到callback中集中显示。</p><pre data-reactid="177"><code data-query="{}" data-lang="data-lang" data-reactid="178">function resolve(loader, s) {
+    if (s.error) {
+        loader.errors.push(s);
+    }
+    loader.done();
+    var cache = processCache[s.cid];
+    if (cache &amp;&amp; !cache.length) {
+        for (var i = 0, len = cache.length; i &lt; len; i++) {
+            cache.shift().loader.done();
+        }
+    }
+}
+
+var Loader = function () {
+    this.list = [];
+    this.timeout = 0;
+    this.errors = [];
+    this.callback = null;
+};
+</code></pre><blockquote data-reactid="179"><blockquote data-reactid="180"><p data-reactid="181">最终，我们将所有的思路组装起来</p></blockquote></blockquote><pre data-reactid="182"><code data-query="{}" data-lang="data-lang" data-reactid="183">(function (root, factory) {
+    if (typeof define === &#x27;function&#x27; &amp;&amp; define.amd) {
+        // AMD. Register as an anonymous module.
+        define(factory);
+    } else {
+        // Browser globals
+        root.Loader = factory();
+    }
+}(this, function () {
+
+    // 用作存储脚本信息
+    var cache = {};
+    // 用作生成不重复的客户端id
+    var _cid = 0;
+    // 用作存储其他loader实例需要运行的脚本任务
+    var processCache = {};
+    // 用作储存别名
+    window.alias = {};
+
+    // 加载状态标识
+    var DONE = &#x27;done&#x27;;
+    var REJECTED = &#x27;rejected&#x27;;
+    var PENDING = &#x27;pending&#x27;;
+
+    // 获取document,head
+    var doc = document;
+    var head = doc.head || doc.getElementsByTagName(&quot;head&quot;)[0] || doc.documentElement;
+
+    /**
+     * 产生客户端id
+     * @return {Number} [description]
+     */
+    function cid() {
+        return _cid++;
+    }
+
+    /**
+     * Script对象，储存需要加载的任务的基本信息
+     * @param  {String} uri     uri 地址 | 需要执行的函数
+     * @param  {String} type    任务类型
+     */
+    function Script(uri, type) {
+        this.uri = uri;
+        this.type = type;
+        this.cid = cid();
+        this.status = PENDING;
+    }
+
+    /**
+     * 从缓存中获取需要的Script对象
+     * 如果没有，新建一个
+     * @param  {String} uri     uri 地址 | 需要执行的函数
+     * @param  {String} type    任务类型
+     * @return {Object}         需要的Script对象
+     */
+    function get(uri, type) {
+        // 如果不存在于缓存中，创建一个新的Script对象
+        return cache[uri] || (cache[uri] = new Script(uri, type));
+    }
+
+    /**
+     * 获取真实地址
+     * @param  {String} name [description]
+     * @return {[type]}      return uri
+     */
+    function getAlias(name) {
+        return alias[name];
+    }
+
+    function getCache(uri, type) {
+        var opts = getAlias(uri);
+        return  opts ? get(opts.uri, opts.type) : get(uri, type);
+    }
+
+    // 处理
+    var handler = {
+        js: jsHandler,
+        css: cssHandler,
+        fn: fnHandler
+    };
+
+    // 对函数的处理
+    function fnHandler(context, s) {
+        // 函数不需要判断是否为正在加载状态
+        try {
+            s.uri();
+            resolve(context, s);
+        }
+        catch (e) {
+            s.error = e.message;
+            resolve(context, s);
+        }
+    }
+
+    // 对css请求的处理
+    function cssHandler(context, s) {
+        // 当其他Loader实体中的任务已经完成时
+        if (s.status !== PENDING) {
+            resolve(context, s);
+            return;
+        }
+        var link = document.createElement(&#x27;link&#x27;);
+        link.type = &#x27;text/css&#x27;;
+        link.rel  = &#x27;stylesheet&#x27;
+        link.href = s.uri;
+        head.appendChild(link);
+        resolve(context, s);
+    };
+
+    // 对js动态加载的处理
+    function jsHandler(context, s) {
+
+        // 处理已完成任务
+        if (s.status !== PENDING) {
+            resolve(context, s);
+            return;
+        }
+
+        // 如果非第一个加载，将剩余的任务和任务关联的上下文塞进正在进行的进程中
+        if (s.changeState) {
+            processCache[s.cid] = processCache[s.cid] || [];
+            processCache[s.cid].push({ loader: context, s: s });
+            return;
+        }
+
+        s.changeState = true;
+
+        // 设置超时标志
+        var isTimeout = true;
+        var script = document.createElement(&#x27;script&#x27;);
+        script.async = true;
+        script.src = s.uri;
+
+        // 如果支持onload事件
+        var hasOnload = &#x27;onload&#x27; in script;
+
+
+        if (hasOnload) {
+            script.onload = jsOnload;
+            script.onerror = function () {
+                jsOnload(&#x27;ScriptError&#x27;);
+            }
+        }
+        else {
+            script.onreadystatechange = function() {
+                if (/loaded|complete/.test(script.readyState)) {
+                    jsOnload();
+                }
+            }
+        }
+
+        // 如果设置了超时，启动一个计时器
+        if (context.timeout) {
+            setTimeout(timeoutHandler, context.timeout);
+        }
+
+        head.appendChild(script);
+
+        function jsOnload(error) {
+            isTimeout = false;
+            script.onload = script.onerror = script.onreadystatechange = null;
+            head.removeChild(script);
+            script = null;
+            if (error &amp;&amp; typeof error === &#x27;string&#x27;) {
+                s.error = error;
+            }
+            resolve(context, s);
+        }
+
+        function timeoutHandler() {
+            if (isTimeout) {
+                console.log(&#x27;timeout&#x27;);
+                jsOnload(&#x27;RequestTimeout&#x27;);
+            }
+        }
+    }
+
+    function resolve(loader, s) {
+        if (s.error) {
+            loader.errors.push(s);
+        }
+        loader.done();
+        var cache = processCache[s.cid];
+        if (cache &amp;&amp; !cache.length) {
+            for (var i = 0, len = cache.length; i &lt; len; i++) {
+                cache.shift().loader.done();
+            }
+        }
+    }
+
+    var Loader = function () {
+        this.list = [];
+        this.errors = [];
+        this.timeout = [];
+        this.callback = null;
+    };
+
+    Loader.prototype.then = function(src, type) {
+        if (src === undefined) {
+            throw new Error(&#x27;木有参数&#x27;);
+        }
+
+        //  修正参数
+        if (!type) {
+            if (typeof src === &#x27;string&#x27;) {
+                if (/\.css$|\.css\?/i.test(src)) {
+                    type = &#x27;css&#x27;;
+                }
+                if (/\.js$|\.js\?/i.test(src)) {
+                    type = &#x27;js&#x27;;
+                }
+            }
+            if (typeof src === &#x27;function&#x27;) {
+                type = &#x27;fn&#x27;
+            }
+        }
+
+        type = type || &#x27;js&#x27;;
+        this.list.push(getCache(src, type));
+        return this;
+    };
+
+    Loader.prototype.done = function(cb) {
+        if (this.callback === null) {
+            this.callback = cb;
+        }
+        if (!this.list.length) {
+            this.callback &amp;&amp; this.callback(this.errors);
+            return;
+        }
+        var script = this.list.shift();
+        handler[script.type](this, script);
+        if (!this.called) {
+            this.called = true;
+            return new Loader();
+        }
+    };
+
+    Loader.prototype.config = function (opts) {
+        this.timeout = opts.timeout || 0;
+        if (opts.alias &amp;&amp; !opts.alias.length) {
+            for (var i in alias) {
+
+            }
+            for (var i = opts.alias.length - 1; i &gt;= 0; i--) {
+                alias[i] = opts.alias[i]
+            }
+        }
+        return this;
+    };
+
+    return Loader;
+}));
+</code></pre><p data-reactid="184">除了此类常规的写法，我们其实还可以使用其他更多的方法来实现脚本动态加载，比如自定义事件，比如模块化加载的实现，比如promise实现等等</p><p data-reactid="185">这篇文章的意义在于开阔思维，回顾基础。</p><p data-reactid="186">下面的observer对象实现了一个简单的事件注册，监听，销毁的功能，对模式有过研究或者码力深厚的同学肯定不陌生。</p><pre data-reactid="187"><code data-query="{}" data-lang="data-lang" data-reactid="188">var observer = (function () {
+
+    var list = {};
+
+    var on = function (evt, cb) {
+        if (!list[evt]) {
+            list[evt] = [];
+        }
+        list[evt].push(cb);
+    };
+
+    var trigger = function () {
+        var evtName = Array.prototype.shift.call(arguments);
+        callbacks = list[evtName];
+        if (!callbacks || callbacks.length === 0) {
+            return;
+        }
+        for (var i = 0, len = callbacks.length; i &lt; len; i++) {
+            callbacks[i].apply(this, arguments);
+        }
+    };
+
+    var off = function (evt, fn) {
+        var callbacks = list[evt];
+        if (!callbacks) {
+            return;
+        }
+        if (!fn) {
+            callbacks &amp;&amp; callbacks.length = 0;
+            return;
+        }
+        for (var i = 0, len = callbacks.length i &lt; len; i++) {
+            if (fn === callbacks[i]) {
+                callbacks.splice(i, 1);
+            }
+        }
+    };
+
+    // 暴露对外接口
+    return {
+        trigger: trigger,
+        on: on,
+        off: off
+    }
+})();
+</code></pre><blockquote data-reactid="189"><blockquote data-reactid="190"><p data-reactid="191">延伸阅读</p></blockquote></blockquote><p data-reactid="192"><a href="http://malcolmyu.github.io/malnote/2014/08/30/JavaScript-Promise-In-Wicked-Detail/" data-reactid="193">JavaScript Promise 探微</a></p><p data-reactid="194"><a href="https://github.com/lifesinger/lifesinger.github.io/issues/170" data-reactid="195">SeaJs源码解析1</a></p><p data-reactid="196"><a href="https://github.com/lifesinger/lifesinger.github.io/issues/171" data-reactid="197">SeaJs源码解析2</a></p><p data-reactid="198"><a href="https://github.com/lifesinger/lifesinger.github.io/issues/175" data-reactid="199">SeaJs源码解析3</a></p><p data-reactid="200"><a href="http://qianduanblog.com/post/headjs.html" data-reactid="201">HeadJs</a></p></article><div data-reactid="202"></div><nav class="single-bar clearfix" data-reactid="203"><span class="prev" data-reactid="204"><a rel="prev" href="/blog/fe/customize-your-chrome-plug-in" data-reactid="205"><em class="eux-icon eux-icon-page-prev" data-reactid="206"></em><!-- react-text: 207 -->定制属于你自己的chrome插件<!-- /react-text --></a></span><span class="next" data-reactid="208"><a rel="next" href="/blog/fe/javascript-loop" data-reactid="209"><em class="eux-icon eux-icon-page-next" data-reactid="210"></em><!-- react-text: 211 -->Javascript事件轮询<!-- /react-text --></a></span></nav></div></div></div><footer class="footer" data-reactid="212"><div class="eux-footer-area-wrapper container-singular" role="complementary" data-reactid="213"><div class="inner clearfix" data-reactid="214"><aside id="simple-links-2" class="widget sl-links-main" data-reactid="215"><h2 class="widgettitle" data-reactid="216">友情链接</h2><ul class="simple-links-list simple-links-2-list" id="simple-links-2-list" data-reactid="217"><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="218"><a target="_blank" href="http://sux.baidu.com/" title="百度 FEX 团队" data-reactid="219">百度 FEX</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="220"><a target="_blank" href="http://efe.baidu.com/" title="百度 EFE 团队" data-reactid="221">百度 EFE</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="222"><a target="_blank" href="http://sux.baidu.com/" title="百度 SUX 团队" data-reactid="223">百度 SUX</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="224"><a target="_blank" href="https://aotu.io/" title="京东凹凸实验室，面向多终端技术体系，致力于构建沉淀与分享包括但不限于交互、页面制作技巧、前端开发、原生APP开发等方面的专业知识及案例。" data-reactid="225">凹凸实验室</a></li><li class="simple-links-item simple-links-widget-item" id="link-379" data-reactid="226"><a target="_blank" href="https://fed.renren.com/" title="人人网FED" data-reactid="227">人人网FED</a></li></ul></aside></div></div><div class="eux-icp" data-reactid="228"><!-- react-text: 229 -->百度EUX 版权所有 ©百度EUX    All rights reserved. 骄傲地采用 <!-- /react-text --><a target="_blank" href="https://github.com/picidaejs/picidaejs" data-reactid="230">Picidae</a><!-- react-text: 231 -->。<!-- /react-text --></div></footer></div>
+</div>
+<script src="/PICIDAE_COMMON.js"></script>
+<script src="/PICIDAE_ENTRY.js"></script>
+</body>
+</html>
